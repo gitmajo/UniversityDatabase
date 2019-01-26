@@ -72,7 +72,16 @@ bool Database::addEmployee(const std::string firstName,
 
 //void Database::loadFromFile();
 //void Database::saveToFile();
-//void Database::removeByPersonalID(const unsigned long personalID);
+
+void Database::removeByPersonalID(const unsigned long personalID)
+{
+    auto iter = std::find_if(begin(data), end(data), [personalID](Person * person){return person->getPersonalID()==personalID;});
+    if (iter != end(data))
+    {
+        data.erase(iter);
+    }
+}
+
 //void Database::modifySalary(const unsigned long personalID);
 //void Database::modifyAdress(const unsigned long personalID);
 //bool Database::validatePersonalID(const unsigned long personalID);
