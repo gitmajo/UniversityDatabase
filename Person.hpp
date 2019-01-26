@@ -11,18 +11,21 @@ class Person
         std::string lastName_;
         unsigned long personalID_;
         bool gender_;
-        std::string adress_;
+        std::string address_;
     
     public:
         Person(const std::string firstName,
                 const std::string lastName,
                 const unsigned long personalID,
                 const bool gender,     
-                const std::string adress);
+                const std::string address);
 
         virtual ~Person() {};
         std::string getLastName() const;
         unsigned long getPersonalID() const;
+        
+        friend std::ostream& operator<<(std::ostream& os, const Person& person);
+
 };
 
 class Employee : public Person
@@ -34,7 +37,7 @@ class Employee : public Person
                 const std::string lastName,
                 const unsigned long personalID,
                 const bool gender,     
-                const std::string adress,
+                const std::string address,
                 const double salary);
 
         double getSalary() const;
@@ -50,7 +53,7 @@ class Student : public Person
                 const std::string lastName,
                 const unsigned long personalID,
                 const bool gender,     
-                const std::string adress,
+                const std::string address,
                 const unsigned long studentIndex);
 
         unsigned long getStudentIndex() const;
