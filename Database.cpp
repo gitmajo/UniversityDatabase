@@ -1,4 +1,8 @@
 #include "Database.hpp"
+#include <algorithm>
+
+//void searchByLastName();
+//void searchByPersonalID();
 
 void Database::printDatabase() const
 {
@@ -6,3 +10,26 @@ void Database::printDatabase() const
         std::cout << person;
     std::cout << "\n";
 }
+
+// void Database::sortBySalary();
+
+void Database::sortByLastName()
+{
+    std::sort(begin(data), end(data), [] (Person * left, Person * right)
+            {
+                return left->getLastName() < right->getLastName();
+            });
+}
+
+void Database::addPerson(Person * person)
+{
+    data.push_back(person);
+}
+
+//void Database::loadFromFile();
+//void Database::saveToFile();
+//void Database::removeByPersonalID(const unsigned long personalID);
+//void Database::modifySalary(const unsigned long personalID);
+//void Database::modifyAdress(const unsigned long personalID);
+//bool Database::validatePersonalID(const unsigned long personalID);
+
