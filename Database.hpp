@@ -11,11 +11,19 @@
 class Database
 {
     private:
-        std::vector<Person> data;
+        std::vector<Person*> data;
     public:
+        void searchByLastName();
+        void searchByPersonalID();
         void printDatabase() const;
-        bool addStudent() const; 
-        bool addEmployee() const;
-
+        void sortBySalary();
+        void sortByLastName();
+        void addPerson(Person * person);
+        void loadFromFile();
+        void saveToFile();
+        void removeByPersonalID(const unsigned long personalID);
+        void modifySalary(const unsigned long personalID);
+        void modifyAdress(const unsigned long personalID);
+        bool validatePersonalID(const unsigned long personalID);
 };
 
