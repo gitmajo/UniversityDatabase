@@ -1,4 +1,6 @@
 #include "Person.hpp"
+#include <sstream>
+#include <iomanip>
 
 Person::Person(const std::string firstName,
                 const std::string lastName,
@@ -24,7 +26,9 @@ unsigned long long Person::getPersonalID() const
 
 std::string Person::getInfo()
 {
-    return "person";
+    auto ss = std::stringstream{};
+    ss << lastName_;
+    return ss.str();
 }
 //{
 /*        os << std::left << std::setw(13) << person.lastName_   << " "
@@ -54,7 +58,10 @@ double Employee::getSalary() const
 
 std::string Employee::getInfo()
 {
-    return "employee";
+    auto ss = std::stringstream{};
+    ss << salary_;
+    return ss.str();
+    
 /*        os << std::left << std::setw(13) << person.lastName_   << " "
            << std::left << std::setw(13) << person.firstName_  << " "
            << std::left << std::setw(13) << person.personalID_ << " "
@@ -83,7 +90,10 @@ unsigned long Student::getStudentIndex() const
 
 std::string Student::getInfo()
 {
-    return "student";
+    auto ss = std::stringstream{};
+    ss << studentIndex_ << std::setw(13) << lastName_;
+    return ss.str();
+
 /*        os << std::left << std::setw(13) << person.lastName_   << " "
            << std::left << std::setw(13) << person.firstName_  << " "
            << std::left << std::setw(13) << person.personalID_ << " "
