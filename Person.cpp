@@ -2,11 +2,11 @@
 
 
 Person::Person(const std::string firstName,
-                const std::string lastName,
-                const unsigned long long personalID,
-                const bool gender,     
-                const std::string address)
-    : firstName_(firstName),
+        const std::string lastName,
+        const unsigned long long personalID,
+        const bool gender,     
+        const std::string address)
+: firstName_(firstName),
     lastName_(lastName),
     personalID_(personalID),
     gender_(gender),
@@ -27,22 +27,22 @@ std::string Person::getInfo()
 {
     auto ss = std::stringstream{};
     ss << std::left << std::setw(13) << lastName_   << " "
-       << std::left << std::setw(13) << firstName_  << " "
-       << std::left << std::setw(13) << personalID_ << " "
-       << std::left << std::setw(13) << gender_  << " "
-       << std::left << std::setw(13) << address_  << "\n";
-    
+        << std::left << std::setw(13) << firstName_  << " "
+        << std::left << std::setw(13) << personalID_ << " "
+        << std::left << std::setw(13) << gender_  << " "
+        << std::left << std::setw(13) << address_  << "\n";
+
     return ss.str();
 }
 
 
 Employee::Employee(const std::string firstName,
-                const std::string lastName,
-                const unsigned long long personalID,
-                const bool gender,     
-                const std::string address,
-                const double salary)
-    : Person(firstName, lastName, personalID, gender, address),
+        const std::string lastName,
+        const unsigned long long personalID,
+        const bool gender,     
+        const std::string address,
+        const double salary)
+: Person(firstName, lastName, personalID, gender, address),
     salary_(salary)
 {}
 
@@ -54,26 +54,26 @@ double Employee::getSalary() const
 std::string Employee::getInfo()
 {
     auto ss = std::stringstream{};
-        
+
     ss << std::left << std::setw(13) << lastName_   << " "
-       << std::left << std::setw(13) << firstName_  << " "
-       << std::left << std::setw(13) << personalID_ << " "
-       << std::left << std::setw(13) << gender_  << " "
-       << std::left << std::setw(13) << address_  << " "
-       << std::left << std::setw(13) << salary_  << " "
-       << std::left << std::setw(13) << "----"  << "\n"; 
-       
+        << std::left << std::setw(13) << firstName_  << " "
+        << std::left << std::setw(13) << personalID_ << " "
+        << std::left << std::setw(13) << gender_  << " "
+        << std::left << std::setw(13) << address_  << " "
+        << std::left << std::setw(13) << salary_  << " "
+        << std::left << std::setw(13) << "----"  << "\n"; 
+
     return ss.str();
 
 }
 
 Student::Student(const std::string firstName,
-                const std::string lastName,
-                const unsigned long long personalID,
-                const bool gender,     
-                const std::string address,
-                const unsigned long studentIndex)
-    : Person(firstName, lastName, personalID, gender, address),
+        const std::string lastName,
+        const unsigned long long personalID,
+        const bool gender,     
+        const std::string address,
+        const unsigned long studentIndex)
+: Person(firstName, lastName, personalID, gender, address),
     studentIndex_(studentIndex)
 {}
 
@@ -90,14 +90,14 @@ unsigned long Student::getStudentIndex() const
 std::string Student::getInfo()
 {
     auto ss = std::stringstream{};
-            
+
     ss << std::left << std::setw(13) << lastName_   << " "
-       << std::left << std::setw(13) << firstName_  << " "
-       << std::left << std::setw(13) << personalID_ << " "
-       << std::left << std::setw(13) << gender_  << " "
-       << std::left << std::setw(13) << address_  << " "
-       << std::left << std::setw(13) << "----"  << " " 
-       << std::left << std::setw(13) << studentIndex_  << "\n";
+        << std::left << std::setw(13) << firstName_  << " "
+        << std::left << std::setw(13) << personalID_ << " "
+        << std::left << std::setw(13) << gender_  << " "
+        << std::left << std::setw(13) << address_  << " "
+        << std::left << std::setw(13) << "----"  << " " 
+        << std::left << std::setw(13) << studentIndex_  << "\n";
 
     return ss.str();
 }

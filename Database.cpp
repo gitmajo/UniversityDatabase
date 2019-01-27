@@ -15,17 +15,17 @@ void Database::sortBySalary()
 {
     std::sort(begin(data), end(data), [](Person* left, Person* right)
             {   
-                //input: 10.1 Nan 2.5  Nan 3.6 
-                //output: 2.5 3.6 10.1 Nan Nan
-                
-                //NaN 2.5 --- if NaN on the left: bad!
-                if (std::isnan(left->getSalary())) return false;
-                
-                //2.5 NaN -- if NaN on the right: good!
-                if (std::isnan(right->getSalary())) return true;
-                
-                //left and right are finite, so compare it usually
-                return left->getSalary() < right->getSalary();
+            //input: 10.1 Nan 2.5  Nan 3.6 
+            //output: 2.5 3.6 10.1 Nan Nan
+
+            //NaN 2.5 --- if NaN on the left: bad!
+            if (std::isnan(left->getSalary())) return false;
+
+            //2.5 NaN -- if NaN on the right: good!
+            if (std::isnan(right->getSalary())) return true;
+
+            //left and right are finite, so compare it usually
+            return left->getSalary() < right->getSalary();
             });
 
 }
@@ -34,7 +34,7 @@ void Database::sortByLastName()
 {
     std::sort(begin(data), end(data), [](Person* left, Person* right)
             {
-                return left->getLastName() < right->getLastName();
+            return left->getLastName() < right->getLastName();
             });
 }
 
@@ -44,27 +44,27 @@ void Database::addPerson(Person* person)
 }
 
 bool Database::addStudent(const std::string firstName, 
-                          const std::string lastName,
-                          const unsigned long long personalID,
-                          const bool gender,
-                          const std::string address,
-                          const unsigned long studentIndex)
+        const std::string lastName,
+        const unsigned long long personalID,
+        const bool gender,
+        const std::string address,
+        const unsigned long studentIndex)
 {
     Person* student = new Student(firstName, lastName, personalID,
-                                   gender, address, studentIndex);
+            gender, address, studentIndex);
     addPerson(student);
     return true;
 }
 
 bool Database::addEmployee(const std::string firstName, 
-                           const std::string lastName,
-                           const unsigned long long personalID,
-                           const bool gender,
-                           const std::string address,
-                           const double salary)
+        const std::string lastName,
+        const unsigned long long personalID,
+        const bool gender,
+        const std::string address,
+        const double salary)
 {
     Person* employee = new Employee(firstName, lastName, personalID,
-                                   gender, address, salary);
+            gender, address, salary);
     addPerson(employee);
     return true;
 }
