@@ -18,7 +18,22 @@ class Database
         void printDatabase() const;
         void sortBySalary();
         void sortByLastName();
-        void addPerson(Person * person);
+        void addPerson(Person* person);
+        
+        bool addStudent(const std::string firstName, 
+                        const std::string lastName,
+                        const unsigned long long personalID,
+                        const bool gender,
+                        const std::string address,
+                        const unsigned long studentIndex);
+
+        bool addEmployee(const std::string firstName,
+                         const std::string lastName,
+                         const unsigned long long personalID,
+                         const bool gender,
+                         const std::string address,
+                         const double salary);
+       
         void loadFromFile();
         void saveToFile();
         void removeByPersonalID(const unsigned long personalID);

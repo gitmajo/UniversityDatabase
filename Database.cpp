@@ -6,8 +6,8 @@
 
 void Database::printDatabase() const
 {
-    for(const auto& person : data)
-        std::cout << person;
+    for(const auto& personPtr : data)
+        std::cout << personPtr;
     std::cout << "\n";
 }
 
@@ -21,10 +21,37 @@ void Database::sortByLastName()
             });
 }
 
-void Database::addPerson(Person * person)
+void Database::addPerson(Person* person)
 {
     data.push_back(person);
 }
+
+bool Database::addStudent(const std::string firstName, 
+                          const std::string lastName,
+                          const unsigned long long personalID,
+                          const bool gender,
+                          const std::string address,
+                          const unsigned long studentIndex)
+{
+    Person* student = new Student(firstName, lastName, personalID,
+                                   gender, address, studentIndex);
+    addPerson(student);
+    return true;
+}
+
+bool Database::addEmployee(const std::string firstName, 
+                           const std::string lastName,
+                           const unsigned long long personalID,
+                           const bool gender,
+                           const std::string address,
+                           const double salary)
+{
+    Person* employee = new Employee(firstName, lastName, personalID,
+                                   gender, address, salary);
+    addPerson(employee);
+    return true;
+}
+
 
 //void Database::loadFromFile();
 //void Database::saveToFile();
