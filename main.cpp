@@ -2,7 +2,7 @@
 #include "Person.hpp"
 #include "Database.hpp"
 
-std::ostream& operator<<(std::ostream& os, Person* person)
+std::ostream& operator<<(std::ostream& os, const Person* person)
 {
     os << person->getInfo();
     return os;
@@ -32,6 +32,7 @@ int main()
     db.sortByLastName();
     db.printDatabase();
 
+    db.saveToFile();
 
     return 0;
 }

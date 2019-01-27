@@ -70,8 +70,27 @@ bool Database::addEmployee(const std::string firstName,
 }
 
 
-//void Database::loadFromFile();
-//void Database::saveToFile();
+bool Database::loadFromFile()
+{
+    return true;
+}
+
+bool Database::saveToFile()
+{
+    std::string filename {"../database.txt"};
+    std::ofstream ofs {filename}; //output file stream
+    
+    if(!ofs){
+        std::cout << "bad filename: " << filename << "\n";
+        return false;
+    }
+    for(const auto& personPtr : data)
+        ofs << personPtr;
+    ofs << "\n";
+    return true;
+}
+
+
 //void Database::removeByPersonalID(const unsigned long personalID);
 //void Database::modifySalary(const unsigned long personalID);
 //void Database::modifyAdress(const unsigned long personalID);

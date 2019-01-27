@@ -23,7 +23,7 @@ unsigned long long Person::getPersonalID() const
     return personalID_;
 }
 
-std::string Person::getInfo()
+std::string Person::getInfo() const
 {
     auto ss = std::stringstream{};
     ss << std::left << std::setw(13) << lastName_   << " "
@@ -51,7 +51,7 @@ double Employee::getSalary() const
     return salary_;
 }
 
-std::string Employee::getInfo()
+std::string Employee::getInfo() const
 {
     auto ss = std::stringstream{};
 
@@ -87,7 +87,7 @@ unsigned long Student::getStudentIndex() const
     return studentIndex_;
 }
 
-std::string Student::getInfo()
+std::string Student::getInfo() const
 {
     auto ss = std::stringstream{};
 

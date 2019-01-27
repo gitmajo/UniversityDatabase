@@ -5,6 +5,7 @@
 #include <vector>
 #include <iomanip>
 #include <algorithm>
+#include <fstream>
 
 #include "Person.hpp"
 
@@ -34,8 +35,8 @@ class Database
                 const std::string address,
                 const double salary);
 
-        void loadFromFile();
-        void saveToFile();
+        bool loadFromFile();
+        bool saveToFile();
         void removeByPersonalID(const unsigned long long personalID);
         void modifySalary(const unsigned long long personalID);
         void modifyAdress(const unsigned long long personalID);
