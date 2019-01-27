@@ -27,18 +27,14 @@ unsigned long long Person::getPersonalID() const
 std::string Person::getInfo()
 {
     auto ss = std::stringstream{};
-    ss << lastName_;
+    ss << std::left << std::setw(13) << lastName_   << " "
+       << std::left << std::setw(13) << firstName_  << " "
+       << std::left << std::setw(13) << personalID_ << " "
+       << std::left << std::setw(13) << gender_  << " "
+       << std::left << std::setw(13) << address_  << "\n";
+    
     return ss.str();
 }
-//{
-/*        os << std::left << std::setw(13) << person.lastName_   << " "
-           << std::left << std::setw(13) << person.firstName_  << " "
-           << std::left << std::setw(13) << person.personalID_ << " "
-           << std::left << std::setw(13) << person.gender_  << " "
-           << std::left << std::setw(13) << person.address_  << "\n";
-            return os;
-*/
-//}
 
 
 Employee::Employee(const std::string firstName,
@@ -59,18 +55,17 @@ double Employee::getSalary() const
 std::string Employee::getInfo()
 {
     auto ss = std::stringstream{};
-    ss << salary_;
+        
+    ss << std::left << std::setw(13) << lastName_   << " "
+       << std::left << std::setw(13) << firstName_  << " "
+       << std::left << std::setw(13) << personalID_ << " "
+       << std::left << std::setw(13) << gender_  << " "
+       << std::left << std::setw(13) << address_  << " "
+       << std::left << std::setw(13) << salary_  << " "
+       << std::left << std::setw(13) << "----"  << "\n"; 
+       
     return ss.str();
-    
-/*        os << std::left << std::setw(13) << person.lastName_   << " "
-           << std::left << std::setw(13) << person.firstName_  << " "
-           << std::left << std::setw(13) << person.personalID_ << " "
-           << std::left << std::setw(13) << person.gender_  << " "
-           << std::left << std::setw(13) << person.address_  << " "
-           << std::left << std::setw(13) << person.salary_  << " "
-           << std::left << std::setw(13) << "----"  << "\n"; 
-            return os;
-*/
+
 }
 
 Student::Student(const std::string firstName,
@@ -91,17 +86,14 @@ unsigned long Student::getStudentIndex() const
 std::string Student::getInfo()
 {
     auto ss = std::stringstream{};
-    ss << studentIndex_ << std::setw(13) << lastName_;
+            
+    ss << std::left << std::setw(13) << lastName_   << " "
+       << std::left << std::setw(13) << firstName_  << " "
+       << std::left << std::setw(13) << personalID_ << " "
+       << std::left << std::setw(13) << gender_  << " "
+       << std::left << std::setw(13) << address_  << " "
+       << std::left << std::setw(13) << "----"  << " " 
+       << std::left << std::setw(13) << studentIndex_  << "\n";
+
     return ss.str();
-
-/*        os << std::left << std::setw(13) << person.lastName_   << " "
-           << std::left << std::setw(13) << person.firstName_  << " "
-           << std::left << std::setw(13) << person.personalID_ << " "
-           << std::left << std::setw(13) << person.gender_  << " "
-           << std::left << std::setw(13) << person.address_  << " "
-           << std::left << std::setw(13) << "----"  << " " 
-           << std::left << std::setw(13) << person.studentIndex_  << "\n";
-            return os;
-*/
-
 }
