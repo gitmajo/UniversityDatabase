@@ -3,6 +3,7 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <cmath>
 
 class Person
 {
@@ -28,6 +29,7 @@ class Person
         friend std::ostream& operator<<(std::ostream& os, Person* person);
 
         virtual std::string getInfo();
+        virtual double getSalary() const = 0; //pure virtual function
         virtual ~Person() {};
         
         
@@ -62,7 +64,8 @@ class Student : public Person
                 const bool gender,     
                 const std::string address,
                 const unsigned long studentIndex);
-
+        
+        double getSalary() const;
         unsigned long getStudentIndex() const;
         std::string getInfo();
 };
