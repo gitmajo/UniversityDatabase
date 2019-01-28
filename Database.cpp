@@ -70,21 +70,40 @@ bool Database::addEmployee(const std::string& firstName,
 }
 
 
-bool Database::loadFromFile(const std::string& filename/*="database.txt"*/)
+bool Database::loadFromFile(const std::string filename/*="database.txt"*/)
 {
     std::ifstream ifs {filename}; //input file stream
-    
+    if(!ifs){
+        std::cout << "Could not open " << filename << " for reading!\n";
+        return false;
+    }
 
-    
+    std::string firstName, lastName, address, salary, studentIndex;
+    unsigned long long personalID;
+    bool gender;
+
+    while(ifs >> lastName >> firstName >> personalID >> gender >>
+            address >> salary >> studentIndex)
+    {
+        if(salary == "----")
+            addStudent(firstName, lastName, personalID, gender, address, std::stold(studentIndex));
+        else if(studentIndex == "----")
+            addEmployee(firstName, lastName, personalID, gender, address, std::stod(salary));
+        else{
+            std::cout << "\nInvalid line in input file!\n";
+            return false;
+        }
+    }
+
     return true;
 }
 
-bool Database::saveToFile(const std::string& filename/*="database.txt"*/)
+bool Database::saveToFile(const std::string filename/*="database.txt"*/)
 {
     std::ofstream ofs {filename}; //output file stream
-    
+
     if(!ofs){
-        std::cout << "bad filename: " << filename << "\n";
+        std::cout << "Could not open " << filename << " for writing!\n";
         return false;
     }
     for(const auto& personPtr : data)

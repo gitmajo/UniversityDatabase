@@ -11,8 +11,6 @@ std::ostream& operator<<(std::ostream& os, const Person* person)
 
 int main()
 {
-    std::cout << "Hello on master!\n\n";
-
     Database db;
 
     db.addStudent("Kubus",  "Puchatek",  91653426865, 1, "Las",     111111);
@@ -33,6 +31,14 @@ int main()
     db.printDatabase();
 
     db.saveToFile();
+
+    Database temp;
+    std::cout << "b print\n";
+    temp.printDatabase();
+    std::cout << "a print\n";
+    
+    temp.loadFromFile();
+    temp.printDatabase();
 
     return 0;
 }
