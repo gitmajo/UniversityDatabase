@@ -13,7 +13,7 @@ class Database
     private:
         std::vector<Person*> data;
     public:
-        void searchByLastName();
+        void searchByLastName(const std::string lastName);
         void searchByPersonalID();
         void printDatabase() const;
         void sortBySalary();

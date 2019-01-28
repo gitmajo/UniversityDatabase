@@ -1,7 +1,19 @@
 #include "Database.hpp"
 #include <algorithm>
 
-//void searchByLastName();
+void Database::searchByLastName(const std::string lastName)
+{
+    std::vector<Person*>::iterator it = std::find_if(begin(data), end(data), [lastName] (Person* person) 
+            {
+                return person -> getLastName() == lastName;
+            });
+    if (it != end(data))
+    {
+        //std::cout << lastName << "found on position " << *it << std::endl;
+        //person
+    }
+}
+
 //void searchByPersonalID();
 
 void Database::printDatabase() const
