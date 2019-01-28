@@ -37,7 +37,7 @@ class Database
 
         void loadFromFile();
         void saveToFile();
-        void removeByPersonalID(const unsigned long long personalID);
+        bool removeByPersonalID(const unsigned long long personalID);
         void modifySalary(const unsigned long long personalID);
         void modifyAdress(const unsigned long long personalID);
         bool validatePersonalID(const unsigned long long personalID);
