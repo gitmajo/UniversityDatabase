@@ -38,6 +38,16 @@ void Database::sortByLastName()
             });
 }
 
+void Database::sortByStudentID()
+{
+    std::sort(begin(data), end(data), [](Person* left, Person* right)
+            {
+                Student* student1 = dynamic_cast<Student*>(left);
+                Student* student2 = dynamic_cast<Student*>(right);
+                return student1 -> getStudentIndex() < student2 -> getStudentIndex();
+            });
+}
+
 void Database::addPerson(Person* person)
 {
     data.push_back(person);
@@ -73,7 +83,7 @@ bool Database::addEmployee(const std::string firstName,
 //void Database::loadFromFile();
 //void Database::saveToFile();
 
-void Database::removeByPersonalID(const unsigned long personalID)
+void Database::removeByPersonalID(const unsigned long long personalID)
 {
     auto iter = std::find_if(begin(data), end(data), [personalID](Person * person){return person->getPersonalID()==personalID;});
     if (iter != end(data))

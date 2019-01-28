@@ -18,6 +18,7 @@ class Database
         void printDatabase() const;
         void sortBySalary();
         void sortByLastName();
+        void sortByStudentID();
         void addPerson(Person* person);
 
         bool addStudent(const std::string firstName, 
