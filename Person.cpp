@@ -1,11 +1,10 @@
 #include "Person.hpp"
 
-
-Person::Person(const std::string firstName,
-        const std::string lastName,
-        const unsigned long long personalID,
-        const bool gender,     
-        const std::string address)
+Person::Person(const std::string& firstName,
+        const std::string& lastName,
+        const unsigned long long& personalID,
+        const bool& gender,
+        const std::string& address)
 : firstName_(firstName),
     lastName_(lastName),
     personalID_(personalID),
@@ -36,12 +35,12 @@ std::string Person::getInfo() const
 }
 
 
-Employee::Employee(const std::string firstName,
-        const std::string lastName,
-        const unsigned long long personalID,
-        const bool gender,     
-        const std::string address,
-        const double salary)
+Employee::Employee(const std::string& firstName,
+        const std::string& lastName,
+        const unsigned long long& personalID,
+        const bool& gender,
+        const std::string& address,
+        const double& salary)
 : Person(firstName, lastName, personalID, gender, address),
     salary_(salary)
 {}
@@ -67,12 +66,12 @@ std::string Employee::getInfo() const
 
 }
 
-Student::Student(const std::string firstName,
-        const std::string lastName,
-        const unsigned long long personalID,
-        const bool gender,     
-        const std::string address,
-        const unsigned long studentIndex)
+Student::Student(const std::string& firstName,
+        const std::string& lastName,
+        const unsigned long long& personalID,
+        const bool& gender,
+        const std::string& address,
+        const unsigned long& studentIndex)
 : Person(firstName, lastName, personalID, gender, address),
     studentIndex_(studentIndex)
 {}

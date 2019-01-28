@@ -21,25 +21,25 @@ class Database
         void sortByLastName();
         void addPerson(Person* person);
 
-        bool addStudent(const std::string firstName, 
-                const std::string lastName,
-                const unsigned long long personalID,
-                const bool gender,
-                const std::string address,
-                const unsigned long studentIndex);
+        bool addStudent(const std::string& firstName,
+                const std::string& lastName,
+                const unsigned long long& personalID,
+                const bool& gender,
+                const std::string& address,
+                const unsigned long& studentIndex);
 
-        bool addEmployee(const std::string firstName,
-                const std::string lastName,
-                const unsigned long long personalID,
-                const bool gender,
-                const std::string address,
-                const double salary);
+        bool addEmployee(const std::string& firstName,
+                const std::string& lastName,
+                const unsigned long long& personalID,
+                const bool& gender,
+                const std::string& address,
+                const double& salary);
 
-        bool loadFromFile();
-        bool saveToFile();
-        void removeByPersonalID(const unsigned long long personalID);
-        void modifySalary(const unsigned long long personalID);
-        void modifyAdress(const unsigned long long personalID);
-        bool validatePersonalID(const unsigned long long personalID);
+        bool loadFromFile(const std::string& filename = "../database.txt");
+        bool saveToFile(const std::string& filename = "../database.txt");
+        void removeByPersonalID(const unsigned long long& personalID);
+        void modifySalary(const unsigned long long& personalID);
+        void modifyAdress(const unsigned long long& personalID);
+        bool validatePersonalID(const unsigned long long& personalID);
 };
 

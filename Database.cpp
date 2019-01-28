@@ -43,12 +43,12 @@ void Database::addPerson(Person* person)
     data.push_back(person);
 }
 
-bool Database::addStudent(const std::string firstName, 
-        const std::string lastName,
-        const unsigned long long personalID,
-        const bool gender,
-        const std::string address,
-        const unsigned long studentIndex)
+bool Database::addStudent(const std::string& firstName,
+        const std::string& lastName,
+        const unsigned long long& personalID,
+        const bool& gender,
+        const std::string& address,
+        const unsigned long& studentIndex)
 {
     Person* student = new Student(firstName, lastName, personalID,
             gender, address, studentIndex);
@@ -56,12 +56,12 @@ bool Database::addStudent(const std::string firstName,
     return true;
 }
 
-bool Database::addEmployee(const std::string firstName, 
-        const std::string lastName,
-        const unsigned long long personalID,
-        const bool gender,
-        const std::string address,
-        const double salary)
+bool Database::addEmployee(const std::string& firstName,
+        const std::string& lastName,
+        const unsigned long long& personalID,
+        const bool& gender,
+        const std::string& address,
+        const double& salary)
 {
     Person* employee = new Employee(firstName, lastName, personalID,
             gender, address, salary);
@@ -70,14 +70,17 @@ bool Database::addEmployee(const std::string firstName,
 }
 
 
-bool Database::loadFromFile()
+bool Database::loadFromFile(const std::string& filename/*="database.txt"*/)
 {
+    std::ifstream ifs {filename}; //input file stream
+    
+
+    
     return true;
 }
 
-bool Database::saveToFile()
+bool Database::saveToFile(const std::string& filename/*="database.txt"*/)
 {
-    std::string filename {"../database.txt"};
     std::ofstream ofs {filename}; //output file stream
     
     if(!ofs){
