@@ -6,6 +6,9 @@
 
 void Database::printDatabase() const
 {
+    if(data.empty())
+        std::cout << "Empty database!\n";
+
     for(const auto& personPtr : data)
         std::cout << personPtr;
     std::cout << "\n";
@@ -14,22 +17,23 @@ void Database::printDatabase() const
 void Database::sortBySalary()
 {
     std::sort(begin(data), end(data), [](Person* left, Person* right)
-            {   
-            //input: 10.1 Nan 2.5  Nan 3.6 
+            {
+            //input: 10.1 NaN 2.5  NaN 3.6
             //output: 2.5 3.6 10.1 Nan Nan
 
-            //NaN 2.5 --- if NaN on the left: bad!
-            if (std::isnan(left->getSalary())) return false;
+            //NaN 2.5 --- if student on the left: bad!
+            if(dynamic_cast<Student*>(left)) return false;
 
-            //2.5 NaN -- if NaN on the right: good!
-            if (std::isnan(right->getSalary())) return true;
+            //2.5 NaN -- if student on the right: good! move all to the right
+            if(dynamic_cast<Student*>(right)) return true;
 
-            //left and right are finite, so compare it usually
-            return left->getSalary() < right->getSalary();
+            Employee* e_left = dynamic_cast<Employee*>(left);
+            Employee* e_right = dynamic_cast<Employee*>(right);
+            //if employee, compare it usually
+            return e_left->getSalary() < e_right->getSalary();
             });
 
 }
-
 void Database::sortByLastName()
 {
     std::sort(begin(data), end(data), [](Person* left, Person* right)

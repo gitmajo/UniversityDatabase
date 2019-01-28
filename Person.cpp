@@ -81,11 +81,6 @@ Student::Student(const std::string& firstName,
     studentIndex_(studentIndex)
 {}
 
-double Student::getSalary() const
-{
-    return std::nan("");
-}
-
 unsigned long Student::getStudentIndex() const
 {
     return studentIndex_;

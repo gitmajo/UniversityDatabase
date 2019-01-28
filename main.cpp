@@ -33,9 +33,7 @@ int main()
     db.saveToFile();
 
     Database temp;
-    std::cout << "b print\n";
     temp.printDatabase();
-    std::cout << "a print\n";
     
     temp.loadFromFile();
     temp.printDatabase();

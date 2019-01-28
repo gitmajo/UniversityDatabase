@@ -27,9 +27,7 @@ class Person
         std::string getLastName() const;
         unsigned long long getPersonalID() const;
         friend std::ostream& operator<<(std::ostream& os, const Person* person);
-
         virtual std::string getInfo() const;
-        virtual double getSalary() const = 0; //pure virtual function
         virtual ~Person() {};
 
 
@@ -66,7 +64,6 @@ class Student : public Person
                 const std::string& address,
                 const unsigned long& studentIndex);
 
-        double getSalary() const;
         unsigned long getStudentIndex() const;
         std::string getInfo() const;
 };
