@@ -50,6 +50,11 @@ double Employee::getSalary() const
     return salary_;
 }
 
+void Employee::setSalary(const double& salary)
+{
+    salary_ = salary;
+}
+
 std::string Employee::getInfo() const
 {
     auto ss = std::stringstream{};

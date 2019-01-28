@@ -48,6 +48,7 @@ class Employee : public Person
                 const double& salary);
 
         double getSalary() const;
+        void setSalary(const double& salary);
         std::string getInfo() const;
 
 };
