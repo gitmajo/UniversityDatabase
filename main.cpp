@@ -2,7 +2,7 @@
 #include "Person.hpp"
 #include "Database.hpp"
 
-std::ostream& operator<<(std::ostream& os, Person* person)
+std::ostream& operator<<(std::ostream& os, const Person* person)
 {
     os << person->getInfo();
     return os;
@@ -11,8 +11,6 @@ std::ostream& operator<<(std::ostream& os, Person* person)
 
 int main()
 {
-    std::cout << "Hello on master!\n\n";
-
     Database db;
 
     db.addStudent("Kubus",  "Puchatek",  91653426865, 1, "Las",     111111);
@@ -32,6 +30,13 @@ int main()
     db.sortByLastName();
     db.printDatabase();
 
+    db.saveToFile();
+
+    Database temp;
+    temp.printDatabase();
+    
+    temp.loadFromFile();
+    temp.printDatabase();
 
     return 0;
 }

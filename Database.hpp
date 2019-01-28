@@ -5,6 +5,7 @@
 #include <vector>
 #include <iomanip>
 #include <algorithm>
+#include <fstream>
 
 #include "Person.hpp"
 
@@ -21,25 +22,26 @@ class Database
         void sortByStudentID();
         void addPerson(Person* person);
 
-        bool addStudent(const std::string firstName, 
-                const std::string lastName,
-                const unsigned long long personalID,
-                const bool gender,
-                const std::string address,
-                const unsigned long studentIndex);
+        bool addStudent(const std::string& firstName,
+                const std::string& lastName,
+                const unsigned long long& personalID,
+                const bool& gender,
+                const std::string& address,
+                const unsigned long& studentIndex);
 
-        bool addEmployee(const std::string firstName,
-                const std::string lastName,
-                const unsigned long long personalID,
-                const bool gender,
-                const std::string address,
-                const double salary);
+        bool addEmployee(const std::string& firstName,
+                const std::string& lastName,
+                const unsigned long long& personalID,
+                const bool& gender,
+                const std::string& address,
+                const double& salary);
 
-        void loadFromFile();
-        void saveToFile();
-        bool removeByPersonalID(const unsigned long long personalID);
-        void modifySalary(const unsigned long long personalID);
-        void modifyAdress(const unsigned long long personalID);
-        bool validatePersonalID(const unsigned long long personalID);
+        bool loadFromFile(const std::string filename = "../database.txt");
+        bool saveToFile(const std::string filename = "../database.txt");
+        bool removeByPersonalID(const unsigned long long& personalID);
+        void modifySalary(const unsigned long long& personalID);
+        void modifyAdress(const unsigned long long& personalID);
+        bool validatePersonalID(const unsigned long long& personalID);
+  
 };
 

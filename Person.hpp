@@ -17,19 +17,17 @@ class Person
         std::string address_;
 
     public:
-        Person(const std::string firstName,
-                const std::string lastName,
-                const unsigned long long personalID,
-                const bool gender,     
-                const std::string address);
+        Person(const std::string& firstName,
+                const std::string& lastName,
+                const unsigned long long& personalID,
+                const bool& gender,
+                const std::string& address);
 
 
         std::string getLastName() const;
         unsigned long long getPersonalID() const;
-        friend std::ostream& operator<<(std::ostream& os, Person* person);
-
-        virtual std::string getInfo();
-        virtual double getSalary() const = 0; //pure virtual function
+        friend std::ostream& operator<<(std::ostream& os, const Person* person);
+        virtual std::string getInfo() const;
         virtual ~Person() {};
 
 
@@ -40,15 +38,16 @@ class Employee : public Person
     private:
         double salary_;
     public:
-        Employee(const std::string firstName,
-                const std::string lastName,
-                const unsigned long long personalID,
-                const bool gender,     
-                const std::string address,
-                const double salary);
+        Employee(const std::string& firstName,
+                const std::string& lastName,
+                const unsigned long long& personalID,
+                const bool& gender,
+                const std::string& address,
+                const double& salary);
 
         double getSalary() const;
-        std::string getInfo();
+        void setSalary(const double& salary);
+        std::string getInfo() const;
 
 };
 
@@ -58,14 +57,13 @@ class Student : public Person
         unsigned long studentIndex_;
 
     public:
-        Student(const std::string firstName,
-                const std::string lastName,
-                const unsigned long long personalID,
-                const bool gender,     
-                const std::string address,
-                const unsigned long studentIndex);
+        Student(const std::string& firstName,
+                const std::string& lastName,
+                const unsigned long long& personalID,
+                const bool& gender,
+                const std::string& address,
+                const unsigned long& studentIndex);
 
-        double getSalary() const;
         unsigned long getStudentIndex() const;
-        std::string getInfo();
+        std::string getInfo() const;
 };

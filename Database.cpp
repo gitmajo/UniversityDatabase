@@ -6,6 +6,9 @@
 
 void Database::printDatabase() const
 {
+    if(data.empty())
+        std::cout << "Empty database!\n";
+
     for(const auto& personPtr : data)
         std::cout << personPtr;
     std::cout << "\n";
@@ -14,22 +17,23 @@ void Database::printDatabase() const
 void Database::sortBySalary()
 {
     std::sort(begin(data), end(data), [](Person* left, Person* right)
-            {   
-            //input: 10.1 Nan 2.5  Nan 3.6 
+            {
+            //input: 10.1 NaN 2.5  NaN 3.6
             //output: 2.5 3.6 10.1 Nan Nan
 
-            //NaN 2.5 --- if NaN on the left: bad!
-            if (std::isnan(left->getSalary())) return false;
+            //NaN 2.5 --- if student on the left: bad!
+            if(dynamic_cast<Student*>(left)) return false;
 
-            //2.5 NaN -- if NaN on the right: good!
-            if (std::isnan(right->getSalary())) return true;
+            //2.5 NaN -- if student on the right: good! move all to the right
+            if(dynamic_cast<Student*>(right)) return true;
 
-            //left and right are finite, so compare it usually
-            return left->getSalary() < right->getSalary();
+            Employee* e_left = dynamic_cast<Employee*>(left);
+            Employee* e_right = dynamic_cast<Employee*>(right);
+            //if employee, compare it usually
+            return e_left->getSalary() < e_right->getSalary();
             });
 
 }
-
 void Database::sortByLastName()
 {
     std::sort(begin(data), end(data), [](Person* left, Person* right)
@@ -53,12 +57,12 @@ void Database::addPerson(Person* person)
     data.push_back(person);
 }
 
-bool Database::addStudent(const std::string firstName, 
-        const std::string lastName,
-        const unsigned long long personalID,
-        const bool gender,
-        const std::string address,
-        const unsigned long studentIndex)
+bool Database::addStudent(const std::string& firstName,
+        const std::string& lastName,
+        const unsigned long long& personalID,
+        const bool& gender,
+        const std::string& address,
+        const unsigned long& studentIndex)
 {
     Person* student = new Student(firstName, lastName, personalID,
             gender, address, studentIndex);
@@ -66,12 +70,12 @@ bool Database::addStudent(const std::string firstName,
     return true;
 }
 
-bool Database::addEmployee(const std::string firstName, 
-        const std::string lastName,
-        const unsigned long long personalID,
-        const bool gender,
-        const std::string address,
-        const double salary)
+bool Database::addEmployee(const std::string& firstName,
+        const std::string& lastName,
+        const unsigned long long& personalID,
+        const bool& gender,
+        const std::string& address,
+        const double& salary)
 {
     Person* employee = new Employee(firstName, lastName, personalID,
             gender, address, salary);
@@ -80,16 +84,56 @@ bool Database::addEmployee(const std::string firstName,
 }
 
 
-//void Database::loadFromFile();
-//void Database::saveToFile();
+bool Database::loadFromFile(const std::string filename/*="database.txt"*/)
+{
+    std::ifstream ifs {filename}; //input file stream
+    if(!ifs){
+        std::cout << "Could not open " << filename << " for reading!\n";
+        return false;
+    }
 
-bool Database::removeByPersonalID(const unsigned long long personalID)
+    std::string firstName, lastName, address, salary, studentIndex;
+    unsigned long long personalID;
+    bool gender;
+
+    while(ifs >> lastName >> firstName >> personalID >> gender >>
+            address >> salary >> studentIndex)
+    {
+        if(salary == "----")
+            addStudent(firstName, lastName, personalID, gender, address, std::stold(studentIndex));
+        else if(studentIndex == "----")
+            addEmployee(firstName, lastName, personalID, gender, address, std::stod(salary));
+        else{
+            std::cout << "\nInvalid line in input file!\n";
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool Database::saveToFile(const std::string filename/*="database.txt"*/)
+{
+    std::ofstream ofs {filename}; //output file stream
+
+    if(!ofs){
+        std::cout << "Could not open " << filename << " for writing!\n";
+        return false;
+    }
+    for(const auto& personPtr : data)
+        ofs << personPtr;
+    ofs << "\n";
+    return true;
+}
+
+bool Database::removeByPersonalID(const unsigned long long& personalID)
 {
     auto iter = std::find_if(begin(data), end(data), [personalID](Person* person){return person->getPersonalID()==personalID;});
     if (iter != end(data))
     {
         data.erase(iter);
     }
+    return true;
 }
 
 //void Database::modifySalary(const unsigned long personalID);
