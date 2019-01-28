@@ -19,6 +19,7 @@ class Database
         void printDatabase() const;
         void sortBySalary();
         void sortByLastName();
+        void sortByStudentID();
         void addPerson(Person* person);
 
         bool addStudent(const std::string& firstName,
@@ -41,5 +42,6 @@ class Database
         void modifySalary(const unsigned long long& personalID);
         void modifyAdress(const unsigned long long& personalID);
         bool validatePersonalID(const unsigned long long& personalID);
+  
 };
 
