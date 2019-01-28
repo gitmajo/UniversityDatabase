@@ -133,6 +133,7 @@ bool Database::removeByPersonalID(const unsigned long long& personalID)
     {
         data.erase(iter);
     }
+    return true;
 }
 
 //void Database::modifySalary(const unsigned long personalID);
