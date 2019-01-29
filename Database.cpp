@@ -1,6 +1,6 @@
 #include "Database.hpp"
 
-void Database::searchByLastName(const std::string lastName)
+void Database::searchByLastName(const std::string& lastName)
 {
     std::vector<Person*>::iterator it = std::find_if(begin(data), end(data), [lastName] (Person* person) 
             {
@@ -11,7 +11,9 @@ void Database::searchByLastName(const std::string lastName)
         std::cout << *it << std::endl;
     }
     else
+    {
         std::cout << "Person " << lastName << " not found." << std::endl;
+    }
 }
 
 void Database::searchByPersonalID(const unsigned long personalID)
@@ -110,15 +112,20 @@ bool Database::addEmployee(const std::string firstName,
 //void Database::loadFromFile();
 //void Database::saveToFile();
 
-/*void Database::removeByPersonalID(const unsigned long long personalID)
+
+bool Database::removeByPersonalID(const unsigned long long personalID)
 {
     auto iter = std::find_if(begin(data), end(data), [personalID](Person* person){return person->getPersonalID()==personalID;});
     if (iter != end(data))
     {
         data.erase(iter);
-        //return true;
+        return true;
     }
-}*/
+    else
+        return false;
+}
+
+//bool Database::removeByStudentID(const unsigned long studentID)
 
 //void Database::modifySalary(const unsigned long personalID);
 //void Database::modifyAdress(const unsigned long personalID);

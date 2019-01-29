@@ -13,7 +13,7 @@ class Database
     private:
         std::vector<Person*> data;
     public:
-        void searchByLastName(const std::string lastName);
+        void searchByLastName(const std::string& lastName);
         void searchByPersonalID(const unsigned long personalID);
         void printDatabase() const;
         void sortBySalary();
@@ -37,7 +37,8 @@ class Database
 
         void loadFromFile();
         void saveToFile();
-        void removeByPersonalID(const unsigned long long personalID);
+        bool removeByPersonalID(const unsigned long long personalID);
+        bool removeByStudentID(const unsigned long studentID);
         void modifySalary(const unsigned long long personalID);
         void modifyAdress(const unsigned long long personalID);
         bool validatePersonalID(const unsigned long long personalID);
