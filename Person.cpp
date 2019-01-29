@@ -1,11 +1,10 @@
 #include "Person.hpp"
 
-
-Person::Person(const std::string firstName,
-        const std::string lastName,
-        const unsigned long long personalID,
-        const bool gender,     
-        const std::string address)
+Person::Person(const std::string& firstName,
+        const std::string& lastName,
+        const unsigned long long& personalID,
+        const bool& gender,
+        const std::string& address)
 : firstName_(firstName),
     lastName_(lastName),
     personalID_(personalID),
@@ -23,7 +22,7 @@ unsigned long long Person::getPersonalID() const
     return personalID_;
 }
 
-std::string Person::getInfo()
+std::string Person::getInfo() const
 {
     auto ss = std::stringstream{};
     ss << std::left << std::setw(13) << lastName_   << " "
@@ -36,12 +35,12 @@ std::string Person::getInfo()
 }
 
 
-Employee::Employee(const std::string firstName,
-        const std::string lastName,
-        const unsigned long long personalID,
-        const bool gender,     
-        const std::string address,
-        const double salary)
+Employee::Employee(const std::string& firstName,
+        const std::string& lastName,
+        const unsigned long long& personalID,
+        const bool& gender,
+        const std::string& address,
+        const double& salary)
 : Person(firstName, lastName, personalID, gender, address),
     salary_(salary)
 {}
@@ -51,7 +50,12 @@ double Employee::getSalary() const
     return salary_;
 }
 
-std::string Employee::getInfo()
+void Employee::setSalary(const double& salary)
+{
+    salary_ = salary;
+}
+
+std::string Employee::getInfo() const
 {
     auto ss = std::stringstream{};
 
@@ -67,27 +71,22 @@ std::string Employee::getInfo()
 
 }
 
-Student::Student(const std::string firstName,
-        const std::string lastName,
-        const unsigned long long personalID,
-        const bool gender,     
-        const std::string address,
-        const unsigned long studentIndex)
+Student::Student(const std::string& firstName,
+        const std::string& lastName,
+        const unsigned long long& personalID,
+        const bool& gender,
+        const std::string& address,
+        const unsigned long& studentIndex)
 : Person(firstName, lastName, personalID, gender, address),
     studentIndex_(studentIndex)
 {}
-
-double Student::getSalary() const
-{
-    return std::nan("");
-}
 
 unsigned long Student::getStudentIndex() const
 {
     return studentIndex_;
 }
 
-std::string Student::getInfo()
+std::string Student::getInfo() const
 {
     auto ss = std::stringstream{};
 
