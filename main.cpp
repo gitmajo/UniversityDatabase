@@ -31,7 +31,15 @@ int main()
     std::cout << "sortByLastName():\n";
     db.sortByLastName();
     db.printDatabase();
+    
+    std::cout << "Searching for Puchatek" << std::endl;
+    db.searchByLastName("Puchatek");
+    std::cout << "Searching for ID 87235681241" << std::endl;
+    db.searchByPersonalID(87235681241);
 
+    std::cout << "sortByStudentID():\n";
+    db.sortByStudentID();
+    db.printDatabase();
 
     return 0;
 }

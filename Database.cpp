@@ -1,5 +1,4 @@
 #include "Database.hpp"
-#include <algorithm>
 
 void Database::searchByLastName(const std::string lastName)
 {
@@ -9,26 +8,21 @@ void Database::searchByLastName(const std::string lastName)
             });
     if (it != end(data))
     {
-        std::cout << lastName << "found on position " << *it << std::endl;
-        Person* p = *it;
-        p -> getInfo();
+        std::cout << *it << std::endl;
     }
     else
         std::cout << "Person " << lastName << " not found." << std::endl;
 }
 
-void searchByPersonalID()
+void Database::searchByPersonalID(const unsigned long personalID)
 {
-
     std::vector<Person*>::iterator it = std::find_if(begin(data), end(data), [personalID] (Person* person) 
             {
                 return person -> getPersonalID() == personalID;
             });
     if (it != end(data))
     {
-        std::cout << personalID << "found on position " << *it << std::endl;
-        Person* p = *it;
-        p -> getInfo();
+        std::cout << *it << std::endl;
     }
     else
         std::cout << "Personal ID " << personalID << " not found." << std::endl;
@@ -116,14 +110,15 @@ bool Database::addEmployee(const std::string firstName,
 //void Database::loadFromFile();
 //void Database::saveToFile();
 
-bool Database::removeByPersonalID(const unsigned long long personalID)
+/*void Database::removeByPersonalID(const unsigned long long personalID)
 {
     auto iter = std::find_if(begin(data), end(data), [personalID](Person* person){return person->getPersonalID()==personalID;});
     if (iter != end(data))
     {
         data.erase(iter);
+        //return true;
     }
-}
+}*/
 
 //void Database::modifySalary(const unsigned long personalID);
 //void Database::modifyAdress(const unsigned long personalID);
