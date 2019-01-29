@@ -16,7 +16,7 @@ class Database
         std::vector<Person*> data;
     public:
         void searchByLastName(const std::string& lastName);
-        void searchByPersonalID(const unsigned long personalID);
+        void searchByPersonalID(const unsigned long long& personalID);
         void printDatabase() const;
         void sortBySalary();
         void sortByLastName();

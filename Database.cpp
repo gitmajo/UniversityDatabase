@@ -4,28 +4,24 @@ void Database::searchByLastName(const std::string& lastName)
 {
     std::vector<Person*>::iterator it = std::find_if(begin(data), end(data), [lastName] (Person* person) 
             {
-                return person -> getLastName() == lastName;
+            return person -> getLastName() == lastName;
             });
+
     if (it != end(data))
-    {
         std::cout << *it << std::endl;
-    }
     else
-    {
         std::cout << "Person " << lastName << " not found." << std::endl;
-    }
 }
 
-void Database::searchByPersonalID(const unsigned long personalID)
+void Database::searchByPersonalID(const unsigned long long& personalID)
 {
     std::vector<Person*>::iterator it = std::find_if(begin(data), end(data), [personalID] (Person* person) 
             {
-                return person -> getPersonalID() == personalID;
+            return person -> getPersonalID() == personalID;
             });
+
     if (it != end(data))
-    {
         std::cout << *it << std::endl;
-    }
     else
         std::cout << "Personal ID " << personalID << " not found." << std::endl;
 }
@@ -72,12 +68,12 @@ void Database::sortByStudentID()
 {
     std::sort(begin(data), end(data), [](Person* left, Person* right)
             {
-                if(dynamic_cast<Employee*>(left)) return false;
-                if(dynamic_cast<Employee*>(right)) return true;
+            if(dynamic_cast<Employee*>(left)) return false;
+            if(dynamic_cast<Employee*>(right)) return true;
 
-                Student* student1 = dynamic_cast<Student*>(left);
-                Student* student2 = dynamic_cast<Student*>(right);
-                return student1->getStudentIndex() < student2->getStudentIndex();
+            Student* student1 = dynamic_cast<Student*>(left);
+            Student* student2 = dynamic_cast<Student*>(right);
+            return student1->getStudentIndex() < student2->getStudentIndex();
             });
 }
 
@@ -159,7 +155,10 @@ bool Database::saveToFile(const std::string filename/*="database.txt"*/)
 
 bool Database::removeByPersonalID(const unsigned long long& personalID)
 {
-    auto iter = std::find_if(begin(data), end(data), [personalID](Person* person){return person->getPersonalID()==personalID;});
+    auto iter = std::find_if(begin(data), end(data), [personalID] (Person* person)
+            { return person->getPersonalID() == personalID;
+            });
+
     if (iter != end(data))
     {
         data.erase(iter);
@@ -169,9 +168,8 @@ bool Database::removeByPersonalID(const unsigned long long& personalID)
         return false;
 }
 
-//bool Database::removeByStudentID(const unsigned long studentID)
 
+//bool Database::removeByStudentID(const unsigned long studentID)
 //void Database::modifySalary(const unsigned long personalID);
 //void Database::modifyAdress(const unsigned long personalID);
-//bool Database::validatePersonalID(const unsigned long personalID);
 
