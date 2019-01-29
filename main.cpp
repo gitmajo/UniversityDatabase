@@ -37,6 +37,10 @@ int main()
     
     temp.loadFromFile();
     temp.printDatabase();
+    
+    std::cout << "validatePersonalID():\n";
+    vpid::test();
+
 
     return 0;
 }
