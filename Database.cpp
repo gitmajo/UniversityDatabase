@@ -48,7 +48,7 @@ void Database::sortByStudentID()
             {
                 Student* student1 = dynamic_cast<Student*>(left);
                 Student* student2 = dynamic_cast<Student*>(right);
-                return student1 -> getStudentIndex() < student2 -> getStudentIndex();
+                return student1->getStudentIndex() < student2->getStudentIndex();
             });
 }
 
