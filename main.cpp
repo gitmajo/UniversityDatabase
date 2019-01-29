@@ -29,6 +29,16 @@ int main()
     std::cout << "sortByLastName():\n";
     db.sortByLastName();
     db.printDatabase();
+    
+    std::cout << "Searching for Puchatek:\n";
+    db.searchByLastName("Puchatek");
+  
+    std::cout << "Searching for ID 87235681241:\n";
+    db.searchByPersonalID(87235681241);
+
+    std::cout << "sortByStudentID():\n";
+    db.sortByStudentID();
+    db.printDatabase();
 
     db.saveToFile();
 
