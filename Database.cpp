@@ -9,12 +9,30 @@ void Database::searchByLastName(const std::string lastName)
             });
     if (it != end(data))
     {
-        //std::cout << lastName << "found on position " << *it << std::endl;
-        //person
+        std::cout << lastName << "found on position " << *it << std::endl;
+        Person* p = *it;
+        p -> getInfo();
     }
+    else
+        std::cout << "Person " << lastName << " not found." << std::endl;
 }
 
-//void searchByPersonalID();
+void searchByPersonalID()
+{
+
+    std::vector<Person*>::iterator it = std::find_if(begin(data), end(data), [personalID] (Person* person) 
+            {
+                return person -> getPersonalID() == personalID;
+            });
+    if (it != end(data))
+    {
+        std::cout << personalID << "found on position " << *it << std::endl;
+        Person* p = *it;
+        p -> getInfo();
+    }
+    else
+        std::cout << "Personal ID " << personalID << " not found." << std::endl;
+}
 
 void Database::printDatabase() const
 {
@@ -54,6 +72,9 @@ void Database::sortByStudentID()
 {
     std::sort(begin(data), end(data), [](Person* left, Person* right)
             {
+                if(dynamic_cast<Employee*>(left)) return false;
+                if(dynamic_cast<Employee*>(right)) return true;
+
                 Student* student1 = dynamic_cast<Student*>(left);
                 Student* student2 = dynamic_cast<Student*>(right);
                 return student1 -> getStudentIndex() < student2 -> getStudentIndex();
