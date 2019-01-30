@@ -28,6 +28,21 @@ personIter Database::searchByPersonalID(const unsigned long long& personalID)
     return it;
 }
 
+personIter Database::searchByStudentID(const unsigned long& studentID)
+{
+    std::vector<Person*>::iterator it = std::find_if(begin(data), end(data), [studentID] (Person* person) 
+            {
+            Student* student = dynamic_cast<Student*>(person);
+            return student -> getStudentIndex() == studentID;
+            });
+
+    if (it != end(data))
+        std::cout << *it << "\n";
+    else
+        std::cout << "Student ID " << studentID << " not found.\n\n";
+    return it;
+}
+
 void Database::printDatabase() const
 {
     if(data.empty())
@@ -168,8 +183,19 @@ bool Database::removeByPersonalID(const unsigned long long& personalID)
         return false;
 }
 
+bool Database::removeByStudentID(const unsigned long& studentID)
+{
+    auto iter = searchByStudentID(studentID);
 
-//bool Database::removeByStudentID(const unsigned long studentID)
+    if (iter != end(data))
+     {
+         data.erase(iter);
+         return true;
+     }
+     else
+         return false;
+}
+
 bool Database::modifySalary(const unsigned long long& personalID, const double& newSalary)
 {
     auto personIter = searchByPersonalID(personalID);
