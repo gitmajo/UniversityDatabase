@@ -19,9 +19,11 @@ class Database
     public:
         personIter searchByLastName(const std::string& lastName);
         personIter searchByPersonalID(const unsigned long long& personalID);
+        personIter searchByStudentID(const unsigned long& studentID);
         void printDatabase() const;
         void sortBySalary();
         void sortByLastName();
+        void sortByPersonalID();
         void sortByStudentID();
         void addPerson(Person* person);
 
@@ -42,6 +44,7 @@ class Database
         bool loadFromFile(const std::string filename = "../database.txt");
         bool saveToFile(const std::string filename = "../database.txt");
         bool removeByPersonalID(const unsigned long long& personalID);
+        bool removeByStudentID(const unsigned long& studentID);
         bool modifySalary(const unsigned long long& personalID, const double& newSalary);
         bool modifyAddress(const unsigned long long& personalID, const std::string& address);
 };

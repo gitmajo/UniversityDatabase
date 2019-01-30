@@ -30,11 +30,21 @@ int main()
     db.sortByLastName();
     db.printDatabase();
 
+    std::cout << "sortByPersonalID():\n";
+    db.sortByPersonalID();
+    db.printDatabase();
+
     std::cout << "Searching for Puchatek:\n";
     db.searchByLastName("Puchatek");
 
     std::cout << "Searching for ID 87235681241:\n";
     db.searchByPersonalID(87235681241);
+
+    std::cout << "Searching for index 334568:\n";
+    db.searchByStudentID(334568);
+    db.removeByStudentID(334568);
+    std::cout << "removeByStudentID(334568):\n";
+    db.printDatabase();
 
     std::cout << "sortByStudentID():\n";
     db.sortByStudentID();
@@ -69,7 +79,7 @@ int main()
     db.modifySalary(87235681240, 3333);
 
     std::cout << "modifySalary(student, 3333):\n";
-    db.modifySalary(64247643211, 3333);
+    db.modifySalary(91653426865, 3333);
 
 
     
