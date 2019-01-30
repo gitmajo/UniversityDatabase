@@ -36,6 +36,12 @@ int main()
     std::cout << "Searching for ID 87235681241:\n";
     db.searchByPersonalID(87235681241);
 
+    std::cout << "Searching for index 334568:\n";
+    db.searchByStudentID(334568);
+    db.removeByStudentID(334568);
+    std::cout << "removeByStudentID(334568):\n";
+    db.printDatabase();
+
     std::cout << "sortByStudentID():\n";
     db.sortByStudentID();
     db.printDatabase();
