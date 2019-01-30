@@ -8,9 +8,9 @@ personIter Database::searchByLastName(const std::string& lastName)
             });
 
     if (it != end(data))
-        std::cout << *it << std::endl;
+        std::cout << *it << "\n";
     else
-        std::cout << "Person " << lastName << " not found\n";
+        std::cout << "Person " << lastName << " not found\n\n";
     return it;
 }
 
@@ -22,9 +22,9 @@ personIter Database::searchByPersonalID(const unsigned long long& personalID)
             });
 
     if (it != end(data))
-        std::cout << *it << std::endl;
+        std::cout << *it << "\n";
     else
-        std::cout << "Personal ID " << personalID << " not found.\n";
+        std::cout << "Personal ID " << personalID << " not found.\n\n";
     return it;
 }
 
@@ -175,17 +175,19 @@ bool Database::modifySalary(const unsigned long long& personalID, const double& 
     auto personIter = searchByPersonalID(personalID);
 
     if (personIter != data.end())
+    {
         if(Employee* isEmployee = dynamic_cast<Employee*>(*personIter))
         {
             isEmployee->setSalary(newSalary);
             return true;
         }
-
+        std::cout << "Personal ID " << personalID << " is not an Employee.\n\n";
+    }
     return false;
 }
 
 
-bool Database::modifyAdress(const unsigned long long& personalID, const std::string& newAddress)
+bool Database::modifyAddress(const unsigned long long& personalID, const std::string& newAddress)
 {
     auto personIter = searchByPersonalID(personalID);
 

@@ -43,5 +43,5 @@ class Database
         bool saveToFile(const std::string filename = "../database.txt");
         bool removeByPersonalID(const unsigned long long& personalID);
         bool modifySalary(const unsigned long long& personalID, const double& newSalary);
-        bool modifyAdress(const unsigned long long& personalID, const std::string& address);
+        bool modifyAddress(const unsigned long long& personalID, const std::string& address);
 };
