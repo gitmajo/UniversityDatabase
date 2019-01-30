@@ -29,8 +29,6 @@ class Person
         friend std::ostream& operator<<(std::ostream& os, const Person* person);
         virtual std::string getInfo() const;
         virtual ~Person() {};
-
-
 };
 
 class Employee : public Person
