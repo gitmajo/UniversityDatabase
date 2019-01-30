@@ -10,13 +10,15 @@
 #include "Person.hpp"
 #include "PersonalID.hpp"
 
+using personIter = std::vector<Person*>::iterator;
+
 class Database
 {
     private:
         std::vector<Person*> data;
     public:
-        void searchByLastName(const std::string& lastName);
-        void searchByPersonalID(const unsigned long long& personalID);
+        personIter searchByLastName(const std::string& lastName);
+        personIter searchByPersonalID(const unsigned long long& personalID);
         void printDatabase() const;
         void sortBySalary();
         void sortByLastName();
@@ -40,6 +42,6 @@ class Database
         bool loadFromFile(const std::string filename = "../database.txt");
         bool saveToFile(const std::string filename = "../database.txt");
         bool removeByPersonalID(const unsigned long long& personalID);
-        void modifySalary(const unsigned long long& personalID);
-        void modifyAdress(const unsigned long long& personalID);
+        bool modifySalary(const unsigned long long& personalID, const double& newSalary);
+        bool modifyAdress(const unsigned long long& personalID, const std::string& address);
 };

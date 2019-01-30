@@ -1,6 +1,6 @@
 #include "Database.hpp"
 
-void Database::searchByLastName(const std::string& lastName)
+personIter Database::searchByLastName(const std::string& lastName)
 {
     std::vector<Person*>::iterator it = std::find_if(begin(data), end(data), [lastName] (Person* person) 
             {
@@ -10,10 +10,11 @@ void Database::searchByLastName(const std::string& lastName)
     if (it != end(data))
         std::cout << *it << std::endl;
     else
-        std::cout << "Person " << lastName << " not found." << std::endl;
+        std::cout << "Person " << lastName << " not found\n";
+    return it;
 }
 
-void Database::searchByPersonalID(const unsigned long long& personalID)
+personIter Database::searchByPersonalID(const unsigned long long& personalID)
 {
     std::vector<Person*>::iterator it = std::find_if(begin(data), end(data), [personalID] (Person* person) 
             {
@@ -23,7 +24,8 @@ void Database::searchByPersonalID(const unsigned long long& personalID)
     if (it != end(data))
         std::cout << *it << std::endl;
     else
-        std::cout << "Personal ID " << personalID << " not found." << std::endl;
+        std::cout << "Personal ID " << personalID << " not found.\n";
+    return it;
 }
 
 void Database::printDatabase() const
@@ -155,9 +157,7 @@ bool Database::saveToFile(const std::string filename/*="database.txt"*/)
 
 bool Database::removeByPersonalID(const unsigned long long& personalID)
 {
-    auto iter = std::find_if(begin(data), end(data), [personalID] (Person* person)
-            { return person->getPersonalID() == personalID;
-            });
+    auto iter = searchByPersonalID(personalID);
 
     if (iter != end(data))
     {
@@ -170,6 +170,31 @@ bool Database::removeByPersonalID(const unsigned long long& personalID)
 
 
 //bool Database::removeByStudentID(const unsigned long studentID)
-//void Database::modifySalary(const unsigned long personalID);
-//void Database::modifyAdress(const unsigned long personalID);
+bool Database::modifySalary(const unsigned long long& personalID, const double& newSalary)
+{
+    auto personIter = searchByPersonalID(personalID);
+
+    if (personIter != data.end())
+        if(Employee* isEmployee = dynamic_cast<Employee*>(*personIter))
+        {
+            isEmployee->setSalary(newSalary);
+            return true;
+        }
+
+    return false;
+}
+
+
+bool Database::modifyAdress(const unsigned long long& personalID, const std::string& newAddress)
+{
+    auto personIter = searchByPersonalID(personalID);
+
+    if (personIter != data.end())
+    {    
+        (*personIter)->setAddress(newAddress);
+        return true;
+    }
+    return false;
+}
+
 

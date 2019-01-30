@@ -34,6 +34,10 @@ std::string Person::getInfo() const
     return ss.str();
 }
 
+void Person::setAddress(const std::string& newAddress)
+{
+    address_ = newAddress;
+}
 
 Employee::Employee(const std::string& firstName,
         const std::string& lastName,
