@@ -30,6 +30,10 @@ int main()
     db.sortByLastName();
     db.printDatabase();
 
+    std::cout << "sortByPersonalID():\n";
+    db.sortByPersonalID();
+    db.printDatabase();
+
     std::cout << "Searching for Puchatek:\n";
     db.searchByLastName("Puchatek");
 

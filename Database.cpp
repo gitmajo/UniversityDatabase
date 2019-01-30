@@ -73,12 +73,21 @@ void Database::sortBySalary()
             });
 
 }
+
 void Database::sortByLastName()
 {
     std::sort(begin(data), end(data), [](Person* left, Person* right)
             {
             return left->getLastName() < right->getLastName();
             });
+}
+
+void Database::sortByPersonalID()
+{
+    std::sort(begin(data), end(data), [](Person* left, Person* right)
+    {
+        return left->getPersonalID() < right->getPersonalID();
+    });
 }
 
 void Database::sortByStudentID()

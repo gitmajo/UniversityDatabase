@@ -23,6 +23,7 @@ class Database
         void printDatabase() const;
         void sortBySalary();
         void sortByLastName();
+        void sortByPersonalID();
         void sortByStudentID();
         void addPerson(Person* person);
 
