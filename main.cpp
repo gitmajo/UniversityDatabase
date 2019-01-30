@@ -51,10 +51,28 @@ int main()
     std::cout << "validatePersonalID():\n";
     vpid::test();
 
+    std::cout << "Searching for ID 87235681241:\n";
+    db.searchByPersonalID(87235681241);
+ 
+    std::cout << "modifyAddress(87235681241, Kalisz):\n";
+    db.modifyAddress(87235681241, "Kalisz");
+    db.searchByPersonalID(87235681241);
 
-    std::cout << "validatePersonalID():\n";
-    vpid::test();
+    std::cout << "modifyAddress(invalid, Kalisz):\n";
+    db.modifyAddress(87235681240, "Kalisz");
+    
+    std::cout << "modifySalary(87235681241, 3333):\n";
+    db.modifySalary(87235681241, 3333);
+    db.searchByPersonalID(87235681241);
 
+    std::cout << "modifySalary(invalid, 3333):\n";
+    db.modifySalary(87235681240, 3333);
+
+    std::cout << "modifySalary(student, 3333):\n";
+    db.modifySalary(64247643211, 3333);
+
+
+    
 
     return 0;
 }

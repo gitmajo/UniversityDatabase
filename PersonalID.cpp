@@ -33,7 +33,7 @@ namespace ValidatePersonalID
         std::cout << b << ": " << validatePersonalID(b) << "\n";
         std::cout << c << ": " << validatePersonalID(c) << "\n";
         std::cout << d << ": " << validatePersonalID(d) << "\n";
-        std::cout << e << ": " << validatePersonalID(e) << "\n";
+        std::cout << e << ": " << validatePersonalID(e) << "\n\n";
     }  
 }
 
