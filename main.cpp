@@ -13,12 +13,13 @@ int main()
 {
     Database db;
 
-    db.addStudent("Kubus",  "Puchatek",  91653426865, 1, "Las",     111111);
-    db.addStudent("Tomasz", "Kowalski",  87654237541, 1, "Wroclaw", 122222);
-    db.addStudent("Kasia",  "Nowak",     64247643211, 0, "Opole",   334568);
-    db.addEmployee("Jan",   "Szymczak",  87235681241, 1, "Wroclaw", 3674);
-    db.addEmployee("Aldona", "Tomczyk",  65321543987, 0, "Lublin",  2211);
-    db.addStudent("Stanislaw", "Olech",  90764357981, 1, "Lublin",  265421);
+    db.addStudent("Kubus",  "Puchatek",   91653426865, 1, "Las",     111111);
+    db.addStudent("Tomasz", "Kowalski",   87654237541, 1, "Wroclaw", 122222);
+    db.addStudent("Kasia",  "Nowak",      64247643211, 0, "Opole",   334568);
+    db.addEmployee("Jan",   "Szymczak",   87235681241, 1, "Wroclaw", 3674);
+    db.addStudent("Franek", "Dabrowski",  11210754919, 1, "Lodz",    123422);
+    db.addEmployee("Aldona", "Tomczyk",   65321543987, 0, "Lublin",  2211);
+    db.addStudent("Stanislaw", "Olech",   90764357981, 1, "Lublin",  265421);
 
     db.printDatabase();
 
@@ -42,10 +43,18 @@ int main()
 
     std::cout << "Searching for index 334568:\n";
     db.searchByStudentID(334568);
-    db.removeByStudentID(334568);
     std::cout << "removeByStudentID(334568):\n";
+    db.removeByStudentID(334568);
     db.printDatabase();
 
+    std::cout << "Searching for PersonalID 11210754919:\n";
+    db.searchByPersonalID(11210754919);
+    std::cout << "removeByPersonalID(11210754919):\n";
+    db.removeByPersonalID(11210754919);
+    db.printDatabase();
+
+
+    
     std::cout << "sortByStudentID():\n";
     db.sortByStudentID();
     db.printDatabase();
