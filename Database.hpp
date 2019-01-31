@@ -5,11 +5,12 @@
 #include "Person.hpp"
 
 using personIter = std::vector<std::shared_ptr<Person>>::iterator;
+using personPtr = std::shared_ptr<Person>;
 
 class Database
 {
     private:
-        std::vector<std::shared_ptr<Person>> data {};
+        std::vector<personPtr> data {};
     public:
         personIter searchByLastName(const std::string& lastName);
         personIter searchByPersonalID(const unsigned long long& personalID);
@@ -19,7 +20,7 @@ class Database
         void sortByLastName();
         void sortByPersonalID();
         void sortByStudentID();
-        void addPerson(std::shared_ptr<Person> person);
+        void addPerson(personPtr person);
 
         bool addStudent(const std::string& firstName,
                 const std::string& lastName,
