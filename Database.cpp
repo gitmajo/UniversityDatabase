@@ -1,4 +1,8 @@
 #include "Database.hpp"
+#include "Employee.hpp"
+#include "Student.hpp"
+#include <fstream>
+#include <algorithm>
 
 personIter Database::searchByLastName(const std::string& lastName)
 {

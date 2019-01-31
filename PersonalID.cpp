@@ -1,4 +1,6 @@
 #include "PersonalID.hpp"
+#include <iostream>
+#include <vector>
 
 namespace
 {

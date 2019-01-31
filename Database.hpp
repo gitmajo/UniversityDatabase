@@ -1,14 +1,7 @@
 #pragma once
-
-#include <iostream>
 #include <string>
 #include <vector>
-#include <iomanip>
-#include <algorithm>
-#include <fstream>
-
 #include "Person.hpp"
-#include "PersonalID.hpp"
 
 using personIter = std::vector<Person*>::iterator;
 
