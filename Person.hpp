@@ -22,7 +22,7 @@ class Person
         std::string getLastName() const;
         unsigned long long getPersonalID() const;
         void setAddress(const std::string& newAddress);
-        
+
         friend std::ostream& operator<<(std::ostream& os, const Person* person);
         virtual std::string getInfo() const;
         virtual ~Person() {};
