@@ -1,8 +1,16 @@
 #include "Database.hpp"
+#include "Employee.hpp"
+#include "Student.hpp"
+#include <fstream>
+#include <algorithm>
+
+using studentPtr = std::shared_ptr<Student>;
+using employeePtr = std::shared_ptr<Employee>;
+using std::dynamic_pointer_cast;
 
 personIter Database::searchByLastName(const std::string& lastName)
 {
-    std::vector<Person*>::iterator it = std::find_if(begin(data), end(data), [lastName] (Person* person) 
+    auto it = std::find_if(begin(data), end(data), [lastName] (personPtr person)
             {
             return person -> getLastName() == lastName;
             });
@@ -16,7 +24,7 @@ personIter Database::searchByLastName(const std::string& lastName)
 
 personIter Database::searchByPersonalID(const unsigned long long& personalID)
 {
-    std::vector<Person*>::iterator it = std::find_if(begin(data), end(data), [personalID] (Person* person) 
+    auto it = std::find_if(begin(data), end(data), [personalID] (personPtr person)
             {
             return person -> getPersonalID() == personalID;
             });
@@ -30,9 +38,9 @@ personIter Database::searchByPersonalID(const unsigned long long& personalID)
 
 personIter Database::searchByStudentID(const unsigned long& studentID)
 {
-    std::vector<Person*>::iterator it = std::find_if(begin(data), end(data), [studentID] (Person* person) 
+    auto it = std::find_if(begin(data), end(data), [studentID] (personPtr person)
             {
-            Student* student = dynamic_cast<Student*>(person);
+            studentPtr student = dynamic_pointer_cast<Student>(person);
             return student -> getStudentIndex() == studentID;
             });
 
@@ -55,19 +63,19 @@ void Database::printDatabase() const
 
 void Database::sortBySalary()
 {
-    std::sort(begin(data), end(data), [](Person* left, Person* right)
+    std::sort(begin(data), end(data), [](personPtr left, personPtr right)
             {
             //input: 10.1 NaN 2.5  NaN 3.6
             //output: 2.5 3.6 10.1 Nan Nan
 
             //NaN 2.5 --- if student on the left: bad!
-            if(dynamic_cast<Student*>(left)) return false;
+            if(dynamic_pointer_cast<Student>(left)) return false;
 
             //2.5 NaN -- if student on the right: good! move all to the right
-            if(dynamic_cast<Student*>(right)) return true;
+            if(dynamic_pointer_cast<Student>(right)) return true;
 
-            Employee* e_left = dynamic_cast<Employee*>(left);
-            Employee* e_right = dynamic_cast<Employee*>(right);
+            employeePtr e_left = dynamic_pointer_cast<Employee>(left);
+            employeePtr e_right = dynamic_pointer_cast<Employee>(right);
             //if employee, compare it usually
             return e_left->getSalary() < e_right->getSalary();
             });
@@ -76,7 +84,7 @@ void Database::sortBySalary()
 
 void Database::sortByLastName()
 {
-    std::sort(begin(data), end(data), [](Person* left, Person* right)
+    std::sort(begin(data), end(data), [](personPtr left, personPtr right)
             {
             return left->getLastName() < right->getLastName();
             });
@@ -84,26 +92,26 @@ void Database::sortByLastName()
 
 void Database::sortByPersonalID()
 {
-    std::sort(begin(data), end(data), [](Person* left, Person* right)
-    {
-        return left->getPersonalID() < right->getPersonalID();
-    });
+    std::sort(begin(data), end(data), [](personPtr left, personPtr right)
+            {
+            return left->getPersonalID() < right->getPersonalID();
+            });
 }
 
 void Database::sortByStudentID()
 {
-    std::sort(begin(data), end(data), [](Person* left, Person* right)
+    std::sort(begin(data), end(data), [](personPtr left, personPtr right)
             {
-            if(dynamic_cast<Employee*>(left)) return false;
-            if(dynamic_cast<Employee*>(right)) return true;
+            if(dynamic_pointer_cast<Employee>(left)) return false;
+            if(dynamic_pointer_cast<Employee>(right)) return true;
 
-            Student* student1 = dynamic_cast<Student*>(left);
-            Student* student2 = dynamic_cast<Student*>(right);
+            studentPtr student1 = dynamic_pointer_cast<Student>(left);
+            studentPtr student2 = dynamic_pointer_cast<Student>(right);
             return student1->getStudentIndex() < student2->getStudentIndex();
             });
 }
 
-void Database::addPerson(Person* person)
+void Database::addPerson(personPtr person)
 {
     data.push_back(person);
 }
@@ -115,8 +123,8 @@ bool Database::addStudent(const std::string& firstName,
         const std::string& address,
         const unsigned long& studentIndex)
 {
-    Person* student = new Student(firstName, lastName, personalID,
-            gender, address, studentIndex);
+    personPtr student = std::make_shared<Student>(firstName,
+            lastName, personalID, gender, address, studentIndex);
     addPerson(student);
     return true;
 }
@@ -128,8 +136,8 @@ bool Database::addEmployee(const std::string& firstName,
         const std::string& address,
         const double& salary)
 {
-    Person* employee = new Employee(firstName, lastName, personalID,
-            gender, address, salary);
+    personPtr employee = std::make_shared<Employee>(firstName,
+            lastName, personalID, gender, address, salary);
     addPerson(employee);
     return true;
 }
@@ -197,12 +205,12 @@ bool Database::removeByStudentID(const unsigned long& studentID)
     auto iter = searchByStudentID(studentID);
 
     if (iter != end(data))
-     {
-         data.erase(iter);
-         return true;
-     }
-     else
-         return false;
+    {
+        data.erase(iter);
+        return true;
+    }
+    else
+        return false;
 }
 
 bool Database::modifySalary(const unsigned long long& personalID, const double& newSalary)
@@ -211,7 +219,7 @@ bool Database::modifySalary(const unsigned long long& personalID, const double& 
 
     if (personIter != data.end())
     {
-        if(Employee* isEmployee = dynamic_cast<Employee*>(*personIter))
+        if(employeePtr isEmployee = dynamic_pointer_cast<Employee>(*personIter))
         {
             isEmployee->setSalary(newSalary);
             return true;
@@ -233,5 +241,4 @@ bool Database::modifyAddress(const unsigned long long& personalID, const std::st
     }
     return false;
 }
-
 

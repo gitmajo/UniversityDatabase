@@ -1,14 +1,9 @@
 #pragma once
-#include <string>
 #include <iostream>
-#include <sstream>
-#include <iomanip>
-#include <cmath>
+#include <string>
 
 class Person
 {
-    //enum gender{male, female};
-
     protected:
         std::string firstName_;
         std::string lastName_;
@@ -27,43 +22,9 @@ class Person
         std::string getLastName() const;
         unsigned long long getPersonalID() const;
         void setAddress(const std::string& newAddress);
-        
+
         friend std::ostream& operator<<(std::ostream& os, const Person* person);
         virtual std::string getInfo() const;
         virtual ~Person() {};
 };
 
-class Employee : public Person
-{ 
-    private:
-        double salary_;
-    public:
-        Employee(const std::string& firstName,
-                const std::string& lastName,
-                const unsigned long long& personalID,
-                const bool& gender,
-                const std::string& address,
-                const double& salary);
-
-        double getSalary() const;
-        void setSalary(const double& salary);
-        std::string getInfo() const;
-
-};
-
-class Student : public Person
-{
-    private:
-        unsigned long studentIndex_;
-
-    public:
-        Student(const std::string& firstName,
-                const std::string& lastName,
-                const unsigned long long& personalID,
-                const bool& gender,
-                const std::string& address,
-                const unsigned long& studentIndex);
-
-        unsigned long getStudentIndex() const;
-        std::string getInfo() const;
-};

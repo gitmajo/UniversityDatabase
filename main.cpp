@@ -1,6 +1,5 @@
-#include <iostream>
-#include "Person.hpp"
 #include "Database.hpp"
+#include "PersonalID.hpp"
 
 std::ostream& operator<<(std::ostream& os, const Person* person)
 {
@@ -13,12 +12,13 @@ int main()
 {
     Database db;
 
-    db.addStudent("Kubus",  "Puchatek",  91653426865, 1, "Las",     111111);
-    db.addStudent("Tomasz", "Kowalski",  87654237541, 1, "Wroclaw", 122222);
-    db.addStudent("Kasia",  "Nowak",     64247643211, 0, "Opole",   334568);
-    db.addEmployee("Jan",   "Szymczak",  87235681241, 1, "Wroclaw", 3674);
-    db.addEmployee("Aldona", "Tomczyk",  65321543987, 0, "Lublin",  2211);
-    db.addStudent("Stanislaw", "Olech",  90764357981, 1, "Lublin",  265421);
+    db.addStudent("Kubus",  "Puchatek",   91653426865, 1, "Las",     111111);
+    db.addStudent("Tomasz", "Kowalski",   87654237541, 1, "Wroclaw", 122222);
+    db.addStudent("Kasia",  "Nowak",      64247643211, 0, "Opole",   334568);
+    db.addEmployee("Jan",   "Szymczak",   87235681241, 1, "Wroclaw", 3674);
+    db.addStudent("Franek", "Dabrowski",  11210754919, 1, "Lodz",    123422);
+    db.addEmployee("Aldona", "Tomczyk",   65321543987, 0, "Lublin",  2211);
+    db.addStudent("Stanislaw", "Olech",   90764357981, 1, "Lublin",  265421);
 
     db.printDatabase();
 
@@ -46,6 +46,20 @@ int main()
     std::cout << "removeByStudentID(334568):\n";
     db.printDatabase();
 
+    std::cout << "Searching for index 334568:\n";
+    db.searchByStudentID(334568);
+    std::cout << "removeByStudentID(334568):\n";
+    db.removeByStudentID(334568);
+    db.printDatabase();
+
+    std::cout << "Searching for PersonalID 11210754919:\n";
+    db.searchByPersonalID(11210754919);
+    std::cout << "removeByPersonalID(11210754919):\n";
+    db.removeByPersonalID(11210754919);
+    db.printDatabase();
+
+
+    
     std::cout << "sortByStudentID():\n";
     db.sortByStudentID();
     db.printDatabase();
@@ -79,7 +93,7 @@ int main()
     db.modifySalary(87235681240, 3333);
 
     std::cout << "modifySalary(student, 3333):\n";
-    db.modifySalary(64247643211, 3333);
+    db.modifySalary(91653426865, 3333);
 
 
     

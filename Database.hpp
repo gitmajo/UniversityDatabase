@@ -1,21 +1,16 @@
 #pragma once
-
-#include <iostream>
 #include <string>
 #include <vector>
-#include <iomanip>
-#include <algorithm>
-#include <fstream>
-
+#include <memory>
 #include "Person.hpp"
-#include "PersonalID.hpp"
 
-using personIter = std::vector<Person*>::iterator;
+using personIter = std::vector<std::shared_ptr<Person>>::iterator;
+using personPtr = std::shared_ptr<Person>;
 
 class Database
 {
     private:
-        std::vector<Person*> data;
+        std::vector<personPtr> data {};
     public:
         personIter searchByLastName(const std::string& lastName);
         personIter searchByPersonalID(const unsigned long long& personalID);
@@ -25,7 +20,7 @@ class Database
         void sortByLastName();
         void sortByPersonalID();
         void sortByStudentID();
-        void addPerson(Person* person);
+        void addPerson(personPtr person);
 
         bool addStudent(const std::string& firstName,
                 const std::string& lastName,
