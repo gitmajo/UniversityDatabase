@@ -52,7 +52,6 @@ int main()
     db.removeByPersonalID(11210754919);
     db.printDatabase();
 
-
     
     std::cout << "sortByStudentID():\n";
     db.sortByStudentID();
