@@ -11,6 +11,7 @@ class Database
 {
     private:
         std::vector<personPtr> data {};
+        constexpr static auto dbFilename = "../database.txt"; //literal
     public:
         personIter searchByLastName(const std::string& lastName);
         personIter searchByPersonalID(const unsigned long long& personalID);
@@ -36,8 +37,8 @@ class Database
                 const std::string& address,
                 const double& salary);
 
-        bool loadFromFile(const std::string filename = "../database.txt");
-        bool saveToFile(const std::string filename = "../database.txt");
+        bool loadFromFile(const std::string filename = dbFilename);
+        bool saveToFile(const std::string filename = dbFilename);
         bool removeByPersonalID(const unsigned long long& personalID);
         bool removeByStudentID(const unsigned long& studentID);
         bool modifySalary(const unsigned long long& personalID, const double& newSalary);
