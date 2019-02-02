@@ -25,14 +25,14 @@ class Database
         bool addStudent(const std::string& firstName,
                 const std::string& lastName,
                 const unsigned long long& personalID,
-                const bool& gender,
+                const Gender& gender,
                 const std::string& address,
                 const unsigned long& studentIndex);
 
         bool addEmployee(const std::string& firstName,
                 const std::string& lastName,
                 const unsigned long long& personalID,
-                const bool& gender,
+                const Gender& gender,
                 const std::string& address,
                 const double& salary);
 

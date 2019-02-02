@@ -10,7 +10,7 @@ class Student : public Person
         Student(const std::string& firstName,
                 const std::string& lastName,
                 const unsigned long long& personalID,
-                const bool& gender,
+                const Gender& gender,
                 const std::string& address,
                 const unsigned long& studentIndex);
 

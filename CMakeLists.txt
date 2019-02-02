@@ -24,6 +24,5 @@ set(HEADER_FILES
     include/Student.hpp
 )
 
+add_compile_options(-Wall -Wextra -Werror -Wpedantic)
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADER_FILES})
-add_compile_options(-Wall -Wextra -Werror)
-
