@@ -3,10 +3,12 @@
 #include "Student.hpp"
 #include <fstream>
 #include <algorithm>
+#include <map>
 
 using studentPtr = std::shared_ptr<Student>;
 using employeePtr = std::shared_ptr<Employee>;
 using std::dynamic_pointer_cast;
+
 
 personIter Database::searchByLastName(const std::string& lastName)
 {
@@ -119,7 +121,7 @@ void Database::addPerson(personPtr person)
 bool Database::addStudent(const std::string& firstName,
         const std::string& lastName,
         const unsigned long long& personalID,
-        const bool& gender,
+        const Gender& gender,
         const std::string& address,
         const unsigned long& studentIndex)
 {
@@ -132,7 +134,7 @@ bool Database::addStudent(const std::string& firstName,
 bool Database::addEmployee(const std::string& firstName,
         const std::string& lastName,
         const unsigned long long& personalID,
-        const bool& gender,
+        const Gender& gender,
         const std::string& address,
         const double& salary)
 {
@@ -153,15 +155,16 @@ bool Database::loadFromFile(const std::string filename/*="database.txt"*/)
 
     std::string firstName, lastName, address, salary, studentIndex;
     unsigned long long personalID;
-    bool gender;
+    char cGender;
+    std::map<char, Gender> convMap {{'0', Gender::female}, {'1', Gender::male}};
 
-    while(ifs >> lastName >> firstName >> personalID >> gender >>
+    while(ifs >> lastName >> firstName >> personalID >> cGender >>
             address >> salary >> studentIndex)
     {
         if(salary == "----")
-            addStudent(firstName, lastName, personalID, gender, address, std::stold(studentIndex));
+            addStudent(firstName, lastName, personalID, convMap[cGender], address, std::stold(studentIndex));
         else if(studentIndex == "----")
-            addEmployee(firstName, lastName, personalID, gender, address, std::stod(salary));
+            addEmployee(firstName, lastName, personalID, convMap[cGender], address, std::stod(salary));
         else{
             std::cout << "\nInvalid line in input file!\n";
             return false;

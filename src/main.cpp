@@ -12,13 +12,13 @@ int main()
 {
     Database db;
 
-    db.addStudent("Kubus",  "Puchatek",   91653426865, 1, "Las",     111111);
-    db.addStudent("Tomasz", "Kowalski",   87654237541, 1, "Wroclaw", 122222);
-    db.addStudent("Kasia",  "Nowak",      64247643211, 0, "Opole",   334568);
-    db.addEmployee("Jan",   "Szymczak",   87235681241, 1, "Wroclaw", 3674);
-    db.addStudent("Franek", "Dabrowski",  11210754919, 1, "Lodz",    123422);
-    db.addEmployee("Aldona", "Tomczyk",   65321543987, 0, "Lublin",  2211);
-    db.addStudent("Stanislaw", "Olech",   90764357981, 1, "Lublin",  265421);
+    db.addStudent("Krzysztof", "Jarzyna",   91653426865,  Gender::male,   "Szczecin", 111111);
+    db.addStudent("Tomasz",    "Kowalski",  87654237541,  Gender::male,   "Wroclaw",  122222);
+    db.addStudent("Kasia",     "Nowak",     64247643211,  Gender::female, "Opole",    334568);
+    db.addEmployee("Jan",      "Szymczak",  87235681241,  Gender::male,   "Wroclaw",  3674);
+    db.addStudent("Franek",    "Dabrowski", 11210754919,  Gender::male,   "Lodz",     123422);
+    db.addEmployee("Aldona",   "Tomczyk",   65321543987,  Gender::female, "Lublin",   2211);
+    db.addStudent("Stanislaw", "Olech",     90764357981,  Gender::male,   "Lublin",   265421);
 
     db.printDatabase();
 
