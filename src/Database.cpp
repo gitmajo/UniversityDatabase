@@ -14,7 +14,7 @@ personIter Database::searchByLastName(const std::string& lastName)
 {
     auto it = std::find_if(begin(data), end(data), [lastName] (personPtr person)
             {
-            return person -> getLastName() == lastName;
+                return person -> getLastName() == lastName;
             });
 
     if (it != end(data))
@@ -28,7 +28,7 @@ personIter Database::searchByPersonalID(const unsigned long long& personalID)
 {
     auto it = std::find_if(begin(data), end(data), [personalID] (personPtr person)
             {
-            return person -> getPersonalID() == personalID;
+                return person -> getPersonalID() == personalID;
             });
 
     if (it != end(data))
@@ -42,8 +42,8 @@ personIter Database::searchByStudentID(const unsigned long& studentID)
 {
     auto it = std::find_if(begin(data), end(data), [studentID] (personPtr person)
             {
-            studentPtr student = dynamic_pointer_cast<Student>(person);
-            return student -> getStudentIndex() == studentID;
+                studentPtr student = dynamic_pointer_cast<Student>(person);
+                return student -> getStudentIndex() == studentID;
             });
 
     if (it != end(data))
@@ -67,19 +67,19 @@ void Database::sortBySalary()
 {
     std::sort(begin(data), end(data), [](personPtr left, personPtr right)
             {
-            //input: 10.1 NaN 2.5  NaN 3.6
-            //output: 2.5 3.6 10.1 Nan Nan
+                //input: 10.1 NaN 2.5  NaN 3.6
+                //output: 2.5 3.6 10.1 Nan Nan
 
-            //NaN 2.5 --- if student on the left: bad!
-            if(dynamic_pointer_cast<Student>(left)) return false;
+                //NaN 2.5 --- if student on the left: bad!
+                if(dynamic_pointer_cast<Student>(left)) return false;
 
-            //2.5 NaN -- if student on the right: good! move all to the right
-            if(dynamic_pointer_cast<Student>(right)) return true;
+                //2.5 NaN -- if student on the right: good! move all to the right
+                if(dynamic_pointer_cast<Student>(right)) return true;
 
-            employeePtr e_left = dynamic_pointer_cast<Employee>(left);
-            employeePtr e_right = dynamic_pointer_cast<Employee>(right);
-            //if employee, compare it usually
-            return e_left->getSalary() < e_right->getSalary();
+                employeePtr e_left = dynamic_pointer_cast<Employee>(left);
+                employeePtr e_right = dynamic_pointer_cast<Employee>(right);
+                //if employee, compare it usually
+                return e_left->getSalary() < e_right->getSalary();
             });
 
 }
@@ -88,7 +88,7 @@ void Database::sortByLastName()
 {
     std::sort(begin(data), end(data), [](personPtr left, personPtr right)
             {
-            return left->getLastName() < right->getLastName();
+                return left->getLastName() < right->getLastName();
             });
 }
 
@@ -96,7 +96,7 @@ void Database::sortByPersonalID()
 {
     std::sort(begin(data), end(data), [](personPtr left, personPtr right)
             {
-            return left->getPersonalID() < right->getPersonalID();
+                return left->getPersonalID() < right->getPersonalID();
             });
 }
 
@@ -104,12 +104,12 @@ void Database::sortByStudentID()
 {
     std::sort(begin(data), end(data), [](personPtr left, personPtr right)
             {
-            if(dynamic_pointer_cast<Employee>(left)) return false;
-            if(dynamic_pointer_cast<Employee>(right)) return true;
+                if(dynamic_pointer_cast<Employee>(left)) return false;
+                if(dynamic_pointer_cast<Employee>(right)) return true;
 
-            studentPtr student1 = dynamic_pointer_cast<Student>(left);
-            studentPtr student2 = dynamic_pointer_cast<Student>(right);
-            return student1->getStudentIndex() < student2->getStudentIndex();
+                studentPtr student1 = dynamic_pointer_cast<Student>(left);
+                studentPtr student2 = dynamic_pointer_cast<Student>(right);
+                return student1->getStudentIndex() < student2->getStudentIndex();
             });
 }
 
@@ -148,7 +148,8 @@ bool Database::addEmployee(const std::string& firstName,
 bool Database::loadFromFile(const std::string filename/*="database.txt"*/)
 {
     std::ifstream ifs {filename}; //input file stream
-    if(!ifs){
+    if(!ifs)
+    {
         std::cout << "Could not open " << filename << " for reading!\n";
         return false;
     }
@@ -162,7 +163,7 @@ bool Database::loadFromFile(const std::string filename/*="database.txt"*/)
             address >> salary >> studentIndex)
     {
         if(salary == "----")
-            addStudent(firstName, lastName, personalID, convMap[cGender], address, std::stold(studentIndex));
+            addStudent(firstName, lastName, personalID, convMap[cGender], address, std::stoul(studentIndex));
         else if(studentIndex == "----")
             addEmployee(firstName, lastName, personalID, convMap[cGender], address, std::stod(salary));
         else{
@@ -178,7 +179,8 @@ bool Database::saveToFile(const std::string filename/*="database.txt"*/)
 {
     std::ofstream ofs {filename}; //output file stream
 
-    if(!ofs){
+    if(!ofs)
+    {
         std::cout << "Could not open " << filename << " for writing!\n";
         return false;
     }

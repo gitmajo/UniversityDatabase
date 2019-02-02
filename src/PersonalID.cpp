@@ -1,12 +1,13 @@
 #include "PersonalID.hpp"
 #include <iostream>
 #include <vector>
+#include <numeric>
 
 namespace
 {
     bool initialIdCheck(std::vector<int>& digits, const unsigned long long& personalID);
     void splitNumberIntoDigits(std::vector<int>& digits, unsigned long long number);
-    bool checkDay(std::vector<int>& digits);
+    bool checkFormatOfDate(std::vector<int>& digits);
     bool checkControlSum(std::vector<int>& digits);
 }
 
@@ -17,7 +18,7 @@ namespace ValidatePersonalID
         std::vector<int> digits {}; 
 
         if( !initialIdCheck(digits, personalID)) return false;
-        if( !checkDay(digits)) return false;
+        if( !checkFormatOfDate(digits)) return false;
         if( !checkControlSum(digits)) return false;
 
         return true;
@@ -63,8 +64,9 @@ namespace
         }
     }
 
-    bool checkDay(std::vector<int>& digits)
+    bool checkFormatOfDate(std::vector<int>& digits)
     {
+        //check if yy-mm-dd format was changed to dd-mm-yy
         int day = digits[4]*10 + digits[5];
         if(day >= 1 and day <= 31)
             return true;
@@ -74,10 +76,11 @@ namespace
 
     bool checkControlSum(std::vector<int>& digits)
     {
-        unsigned long int sum = 0;
         const std::vector<int> multipliers {1, 3, 7, 9, 1, 3, 7, 9, 1, 3, 1};
-        for(unsigned int i=0; i<digits.size(); i++)
-            sum += (digits[i] * multipliers[i]);
+
+        //sum = (dig[i]*mul[i] + dig[i+1]*mul[i+1] + ...
+        unsigned long int sum = std::inner_product(digits.begin(), digits.end(),
+               multipliers.begin(), 0);
 
         if(sum % 10 == 0) 
             return true;
