@@ -10,7 +10,7 @@ using personPtr = std::shared_ptr<Person>;
 class Database
 {
     private:
-        std::vector<personPtr> data {};
+        std::vector<personPtr> data_ {};
         constexpr static auto dbFilename = "../database.txt"; //literal
         bool parseLineByLine(std::ifstream& ifs);
         bool writeLineByLine(std::ofstream& ofs);

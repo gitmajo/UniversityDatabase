@@ -13,7 +13,7 @@ class Person
         unsigned long long personalID_;
         Gender gender_;
         std::string address_;
-        std::map<Gender, char> convMap {{Gender::female, '0'}, {Gender::male, '1'}};
+        std::map<Gender, char> convMap_ {{Gender::female, '0'}, {Gender::male, '1'}};
 
     public:
         Person(const std::string& firstName,

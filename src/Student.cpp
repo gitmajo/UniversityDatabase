@@ -24,7 +24,7 @@ std::string Student::getInfo() const
     ss << std::left << std::setw(13) << lastName_   << " "
         << std::left << std::setw(13) << firstName_  << " "
         << std::left << std::setw(13) << personalID_ << " "
-        << std::left << std::setw(8) << convMap.at(gender_)  << " "
+        << std::left << std::setw(8) << convMap_.at(gender_)  << " "
         << std::left << std::setw(13) << address_  << " "
         << std::left << std::setw(13) << "----"  << " " 
         << std::left << std::setw(13) << studentIndex_  << "\n";
