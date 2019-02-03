@@ -61,7 +61,6 @@ void Database::printDatabase() const
     std::cout << "\n";
 }
 
-
 void Database::sortBySalary()
 {
     std::sort(begin(data), end(data), [](personPtr left, personPtr right)
@@ -76,7 +75,6 @@ void Database::sortBySalary()
                 //left and right are finite, so compare it usually
                 return left->getSalary() < right->getSalary();
             });
-
 }
 
 void Database::sortByLastName()
@@ -230,7 +228,6 @@ bool Database::modifySalary(const unsigned long long& personalID, const double& 
     return false;
 }
 
-
 bool Database::modifyAddress(const unsigned long long& personalID, const std::string& newAddress)
 {
     auto personIter = searchByPersonalID(personalID);
@@ -242,4 +239,3 @@ bool Database::modifyAddress(const unsigned long long& personalID, const std::st
     }
     return false;
 }
-
