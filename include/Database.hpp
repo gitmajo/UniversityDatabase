@@ -12,6 +12,8 @@ class Database
     private:
         std::vector<personPtr> data {};
         constexpr static auto dbFilename = "../database.txt"; //literal
+        bool parseLineByLine(std::ifstream& ifs);
+        bool writeLineByLine(std::ofstream& ofs);
     public:
         personIter searchByLastName(const std::string& lastName);
         personIter searchByPersonalID(const unsigned long long& personalID);

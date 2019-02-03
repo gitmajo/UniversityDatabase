@@ -29,6 +29,9 @@ class Person
 
         friend std::ostream& operator<<(std::ostream& os, const Person* person);
         virtual std::string getInfo() const;
+        virtual double getSalary() const;
+        virtual unsigned long getStudentIndex() const;
+        virtual void setSalary(const double& salary);
         virtual ~Person() {};
 };
 

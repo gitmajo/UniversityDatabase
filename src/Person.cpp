@@ -1,6 +1,7 @@
 #include "Person.hpp"
 #include <sstream>
 #include <iomanip>
+#include <cmath>
 
 Person::Person(const std::string& firstName,
         const std::string& lastName,
@@ -36,9 +37,19 @@ std::string Person::getInfo() const
     return ss.str();
 }
 
+double Person::getSalary() const
+{
+    return std::nan("");
+}
+
+unsigned long Person::getStudentIndex() const
+{
+    return 0;
+}
+
 void Person::setAddress(const std::string& newAddress)
 {
     address_ = newAddress;
 }
 
-
+void Person::setSalary(const double& /*salary*/) { }
