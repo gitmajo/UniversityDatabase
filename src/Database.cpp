@@ -11,12 +11,12 @@ using employeePtr = std::shared_ptr<Employee>;
 
 personIter Database::searchByLastName(const std::string& lastName)
 {
-    auto it = std::find_if(begin(data), end(data), [lastName] (personPtr person)
+    auto it = std::find_if(begin(data_), end(data_), [lastName] (personPtr person)
             {
                 return person->getLastName() == lastName;
             });
 
-    if (it != end(data))
+    if (it != end(data_))
         std::cout << *it << "\n";
     else
         std::cout << "Person " << lastName << " not found\n\n";
@@ -25,12 +25,12 @@ personIter Database::searchByLastName(const std::string& lastName)
 
 personIter Database::searchByPersonalID(const unsigned long long& personalID)
 {
-    auto it = std::find_if(begin(data), end(data), [personalID] (personPtr person)
+    auto it = std::find_if(begin(data_), end(data_), [personalID] (personPtr person)
             {
                 return person->getPersonalID() == personalID;
             });
 
-    if (it != end(data))
+    if (it != end(data_))
         std::cout << *it << "\n";
     else
         std::cout << "Personal ID " << personalID << " not found.\n\n";
@@ -39,12 +39,12 @@ personIter Database::searchByPersonalID(const unsigned long long& personalID)
 
 personIter Database::searchByStudentID(const unsigned long& studentID)
 {
-    auto it = std::find_if(begin(data), end(data), [studentID] (personPtr person)
+    auto it = std::find_if(begin(data_), end(data_), [studentID] (personPtr person)
             {
                 return person->getStudentIndex() == studentID;
             });
 
-    if (it != end(data))
+    if (it != end(data_))
         std::cout << *it << "\n";
     else
         std::cout << "Student ID " << studentID << " not found.\n\n";
@@ -53,17 +53,17 @@ personIter Database::searchByStudentID(const unsigned long& studentID)
 
 void Database::printDatabase() const
 {
-    if(data.empty())
-        std::cout << "Empty database!\n";
+    if(data_.empty())
+        std::cout << "Empty data_base!\n";
 
-    for(const auto& personPtr : data)
+    for(const auto& personPtr : data_)
         std::cout << personPtr;
     std::cout << "\n";
 }
 
 void Database::sortBySalary()
 {
-    std::sort(begin(data), end(data), [](personPtr left, personPtr right)
+    std::sort(begin(data_), end(data_), [](personPtr left, personPtr right)
             {   //input: 10.1 Nan 2.5  Nan 3.6    //output: 2.5 3.6 10.1 Nan Nan
                 
                 //NaN 2.5 --- if NaN on the left: bad!
@@ -79,7 +79,7 @@ void Database::sortBySalary()
 
 void Database::sortByLastName()
 {
-    std::sort(begin(data), end(data), [](personPtr left, personPtr right)
+    std::sort(begin(data_), end(data_), [](personPtr left, personPtr right)
             {
                 return left->getLastName() < right->getLastName();
             });
@@ -87,7 +87,7 @@ void Database::sortByLastName()
 
 void Database::sortByPersonalID()
 {
-    std::sort(begin(data), end(data), [](personPtr left, personPtr right)
+    std::sort(begin(data_), end(data_), [](personPtr left, personPtr right)
             {
                 return left->getPersonalID() < right->getPersonalID();
             });
@@ -95,7 +95,7 @@ void Database::sortByPersonalID()
 
 void Database::sortByStudentID()
 {
-    std::sort(begin(data), end(data), [](personPtr left, personPtr right)
+    std::sort(begin(data_), end(data_), [](personPtr left, personPtr right)
             {
                 return left->getStudentIndex() < right->getStudentIndex();
             });
@@ -103,7 +103,7 @@ void Database::sortByStudentID()
 
 void Database::addPerson(personPtr person)
 {
-    data.push_back(person);
+    data_.push_back(person);
 }
 
 bool Database::addStudent(const std::string& firstName,
@@ -132,7 +132,7 @@ bool Database::addEmployee(const std::string& firstName,
     return true;
 }
 
-bool Database::loadFromFile(const std::string filename/*="database.txt"*/)
+bool Database::loadFromFile(const std::string filename/*="data_base.txt"*/)
 {
     std::ifstream ifs {filename}; //input file stream
     if(!ifs)
@@ -166,7 +166,7 @@ bool Database::parseLineByLine(std::ifstream& ifs)
     return true;
 }
 
-bool Database::saveToFile(const std::string filename/*="database.txt"*/)
+bool Database::saveToFile(const std::string filename/*="data_base.txt"*/)
 {
     std::ofstream ofs {filename}; //output file stream
 
@@ -180,7 +180,7 @@ bool Database::saveToFile(const std::string filename/*="database.txt"*/)
 
 bool Database::writeLineByLine(std::ofstream& ofs)
 {
-    for(const auto& personPtr : data)
+    for(const auto& personPtr : data_)
         ofs << personPtr;
     ofs << "\n";
     return true;
@@ -190,9 +190,9 @@ bool Database::removeByPersonalID(const unsigned long long& personalID)
 {
     auto iter = searchByPersonalID(personalID);
 
-    if (iter != end(data))
+    if (iter != end(data_))
     {
-        data.erase(iter);
+        data_.erase(iter);
         return true;
     }
     else
@@ -203,9 +203,9 @@ bool Database::removeByStudentID(const unsigned long& studentID)
 {
     auto iter = searchByStudentID(studentID);
 
-    if (iter != end(data))
+    if (iter != end(data_))
     {
-        data.erase(iter);
+        data_.erase(iter);
         return true;
     }
     else
@@ -216,7 +216,7 @@ bool Database::modifySalary(const unsigned long long& personalID, const double& 
 {
     auto personIter = searchByPersonalID(personalID);
 
-    if (personIter != data.end())
+    if (personIter != data_.end())
     {
         if(std::isfinite((*personIter)->getSalary()))
         {
@@ -232,7 +232,7 @@ bool Database::modifyAddress(const unsigned long long& personalID, const std::st
 {
     auto personIter = searchByPersonalID(personalID);
 
-    if (personIter != data.end())
+    if (personIter != data_.end())
     {    
         (*personIter)->setAddress(newAddress);
         return true;
