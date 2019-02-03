@@ -4,17 +4,16 @@
 #include <fstream>
 #include <algorithm>
 #include <map>
+#include <cmath>
 
 using studentPtr = std::shared_ptr<Student>;
 using employeePtr = std::shared_ptr<Employee>;
-using std::dynamic_pointer_cast;
-
 
 personIter Database::searchByLastName(const std::string& lastName)
 {
     auto it = std::find_if(begin(data), end(data), [lastName] (personPtr person)
             {
-                return person -> getLastName() == lastName;
+                return person->getLastName() == lastName;
             });
 
     if (it != end(data))
@@ -28,7 +27,7 @@ personIter Database::searchByPersonalID(const unsigned long long& personalID)
 {
     auto it = std::find_if(begin(data), end(data), [personalID] (personPtr person)
             {
-                return person -> getPersonalID() == personalID;
+                return person->getPersonalID() == personalID;
             });
 
     if (it != end(data))
@@ -42,8 +41,7 @@ personIter Database::searchByStudentID(const unsigned long& studentID)
 {
     auto it = std::find_if(begin(data), end(data), [studentID] (personPtr person)
             {
-                studentPtr student = dynamic_pointer_cast<Student>(person);
-                return student -> getStudentIndex() == studentID;
+                return person->getStudentIndex() == studentID;
             });
 
     if (it != end(data))
@@ -66,22 +64,17 @@ void Database::printDatabase() const
 void Database::sortBySalary()
 {
     std::sort(begin(data), end(data), [](personPtr left, personPtr right)
-            {
-                //input: 10.1 NaN 2.5  NaN 3.6
-                //output: 2.5 3.6 10.1 Nan Nan
+            {   //input: 10.1 Nan 2.5  Nan 3.6    //output: 2.5 3.6 10.1 Nan Nan
+                
+                //NaN 2.5 --- if NaN on the left: bad!
+                if (std::isnan(left->getSalary())) return false;
 
-                //NaN 2.5 --- if student on the left: bad!
-                if(dynamic_pointer_cast<Student>(left)) return false;
+                //2.5 NaN -- if NaN on the right: good!
+                if (std::isnan(right->getSalary())) return true;
 
-                //2.5 NaN -- if student on the right: good! move all to the right
-                if(dynamic_pointer_cast<Student>(right)) return true;
-
-                employeePtr e_left = dynamic_pointer_cast<Employee>(left);
-                employeePtr e_right = dynamic_pointer_cast<Employee>(right);
-                //if employee, compare it usually
-                return e_left->getSalary() < e_right->getSalary();
+                //left and right are finite, so compare it usually
+                return left->getSalary() < right->getSalary();
             });
-
 }
 
 void Database::sortByLastName()
@@ -104,12 +97,7 @@ void Database::sortByStudentID()
 {
     std::sort(begin(data), end(data), [](personPtr left, personPtr right)
             {
-                if(dynamic_pointer_cast<Employee>(left)) return false;
-                if(dynamic_pointer_cast<Employee>(right)) return true;
-
-                studentPtr student1 = dynamic_pointer_cast<Student>(left);
-                studentPtr student2 = dynamic_pointer_cast<Student>(right);
-                return student1->getStudentIndex() < student2->getStudentIndex();
+                return left->getStudentIndex() < right->getStudentIndex();
             });
 }
 
@@ -144,7 +132,6 @@ bool Database::addEmployee(const std::string& firstName,
     return true;
 }
 
-
 bool Database::loadFromFile(const std::string filename/*="database.txt"*/)
 {
     std::ifstream ifs {filename}; //input file stream
@@ -153,7 +140,11 @@ bool Database::loadFromFile(const std::string filename/*="database.txt"*/)
         std::cout << "Could not open " << filename << " for reading!\n";
         return false;
     }
+    return parseLineByLine(ifs);
+}
 
+bool Database::parseLineByLine(std::ifstream& ifs)
+{
     std::string firstName, lastName, address, salary, studentIndex;
     unsigned long long personalID;
     char cGender;
@@ -166,12 +157,12 @@ bool Database::loadFromFile(const std::string filename/*="database.txt"*/)
             addStudent(firstName, lastName, personalID, convMap[cGender], address, std::stoul(studentIndex));
         else if(studentIndex == "----")
             addEmployee(firstName, lastName, personalID, convMap[cGender], address, std::stod(salary));
-        else{
+        else
+        {
             std::cout << "\nInvalid line in input file!\n";
             return false;
         }
     }
-
     return true;
 }
 
@@ -184,13 +175,16 @@ bool Database::saveToFile(const std::string filename/*="database.txt"*/)
         std::cout << "Could not open " << filename << " for writing!\n";
         return false;
     }
+    return writeLineByLine(ofs);
+}
+
+bool Database::writeLineByLine(std::ofstream& ofs)
+{
     for(const auto& personPtr : data)
         ofs << personPtr;
     ofs << "\n";
     return true;
 }
-
-
 
 bool Database::removeByPersonalID(const unsigned long long& personalID)
 {
@@ -224,16 +218,15 @@ bool Database::modifySalary(const unsigned long long& personalID, const double& 
 
     if (personIter != data.end())
     {
-        if(employeePtr isEmployee = dynamic_pointer_cast<Employee>(*personIter))
+        if(std::isfinite((*personIter)->getSalary()))
         {
-            isEmployee->setSalary(newSalary);
+            (*personIter)->setSalary(newSalary);
             return true;
         }
         std::cout << "Personal ID " << personalID << " is not an Employee.\n\n";
     }
     return false;
 }
-
 
 bool Database::modifyAddress(const unsigned long long& personalID, const std::string& newAddress)
 {
@@ -246,4 +239,3 @@ bool Database::modifyAddress(const unsigned long long& personalID, const std::st
     }
     return false;
 }
-
