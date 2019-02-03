@@ -132,7 +132,7 @@ bool Database::addEmployee(const std::string& firstName,
     return true;
 }
 
-bool Database::loadFromFile(const std::string filename/*="data_base.txt"*/)
+bool Database::loadFromFile(const std::string filename/*="database.txt"*/)
 {
     std::ifstream ifs {filename}; //input file stream
     if(!ifs)
@@ -166,7 +166,7 @@ bool Database::parseLineByLine(std::ifstream& ifs)
     return true;
 }
 
-bool Database::saveToFile(const std::string filename/*="data_base.txt"*/)
+bool Database::saveToFile(const std::string filename/*="database.txt"*/)
 {
     std::ofstream ofs {filename}; //output file stream
 
